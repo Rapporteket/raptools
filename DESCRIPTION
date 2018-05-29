@@ -1,0 +1,14 @@
+Package: raptools
+Title: Tools for Rapporteket development
+Version: 0.1
+Authors@R: "Are Edvardsen <are.edvardsen@helse-nord.no> [aut, cre]"
+Maintainer: Are Edvardsen <are.edvardsen@helse-nord.no>
+Description: Tools for working with Rapporteket. Mainly for developers.
+Depends: R (>= 3.4.4)
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+VignetteBuilder: knitr
+URL: http://github.com/Rapporteket/raptools
+BugReports: http://github.com/Rapporteket/raptools/issues
+Suggests: testthat
