@@ -1,8 +1,18 @@
 # Define server logic providing details and summary url
-server <- function(input, output) {
+
+library(httr)
+
+server <- function(input, output, session) {
+
+  observe({
+    cd <- session$clientData
+    updateTextInput(session, inputId = "baseUrl",
+                    value = paste0("http://", cd$url_hostname, ":",
+                                   cd$url_port))
+    })
 
   makeFrame <- reactive({
-    data.frame(para = c("App", "user", "groups", "resh_id", "role"),
+    data.frame(para = c("app", "user", "groups", "resh_id", "role"),
                value = c(input$app,
                          input$user,
                          paste(input$groups, collapse = ","),
@@ -28,12 +38,18 @@ server <- function(input, output) {
     )
   })
 
+  makeHttp <- eventReactive(
+    input$makeRequest, {
+      GET(input$baseUrl)
+      }
+    )
+
   compileUrl <- reactive({
-    paste0(input$baseUrl, "/", input$app, "?",
-           paste0(input$proxyUser, "=", input$user, "?",
+    paste0(input$baseUrl, input$app, "/?",
+           paste0(input$proxyUser, "=", input$user, "&",
                   input$proxyGroups, "=", paste(input$groups, collapse = ","),
-                  "?",
-                  input$whitelistResh, "=", input$resh_id, "?",
+                  "&",
+                  input$whitelistResh, "=", input$resh_id, "&",
                   input$whitelistRole, "=", input$role))
   })
 
@@ -48,4 +64,8 @@ server <- function(input, output) {
     tags$a(url, href=url)
   })
 
+  # Generate http-content
+  output$httpRequest <- renderPrint({
+    parseQueryString(session$clientData$url_search)
+  })
 }

@@ -10,11 +10,11 @@ ui <- fluidPage(
     # Sidebar panel for inputs ----
     sidebarPanel(
       textInput(inputId = "baseUrl",
-                label = "Base url:",
-                value = "http://127.0.0.1:4481/"),
+                label = "base url:",
+                value = "http://127.0.0.1"),
       selectInput(inputId = "app",
                 label = "app:",
-                choices = c("intensiv", "nakke")),
+                choices = c("", "/intensiv", "/nakke")),
       selectInput(inputId = "user",
                   label = "user:",
                   choices = c("testUser1", "testUser2")),
@@ -41,26 +41,28 @@ ui <- fluidPage(
                 value = "resh_id"),
       textInput(inputId = "whitelistRole",
                 label = "whitelistRole:",
-                value = "role")
+                value = "role"),
+      actionButton(inputId = "makeRequest",
+                   label = "make request")
 
     ),
 
     # Main panel for displaying outputs ----
     mainPanel(
 
+      tags$h2("Real scenario"),
+      tags$br(),
       # Output tabular overview
       tableOutput("tab"),
 
-      # Output: verbatime text for url
-      tags$h2("Link"),
+      # Output url
+      tags$h2("Link simulation"),
       tags$br(),
       uiOutput("url"),
 
-      # Output: Verbatim text for data summary ----
-      verbatimTextOutput("summary"),
+      # output http request
+      verbatimTextOutput("httpRequest")
 
-      # Output: HTML table with requested number of observations ----
-      tableOutput("view")
     )
   )
 )
