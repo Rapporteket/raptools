@@ -41,10 +41,7 @@ ui <- fluidPage(
                 value = "resh_id"),
       textInput(inputId = "whitelistRole",
                 label = "whitelistRole:",
-                value = "role"),
-      actionButton(inputId = "makeRequest",
-                   label = "make request")
-
+                value = "role")
     ),
 
     # Main panel for displaying outputs ----
@@ -61,6 +58,7 @@ ui <- fluidPage(
       uiOutput("url"),
 
       # output http request
+      h2("Test of simulation if localhost"),
       verbatimTextOutput("httpRequest")
 
     )

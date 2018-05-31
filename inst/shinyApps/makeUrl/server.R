@@ -38,12 +38,6 @@ server <- function(input, output, session) {
     )
   })
 
-  makeHttp <- eventReactive(
-    input$makeRequest, {
-      GET(input$baseUrl)
-      }
-    )
-
   compileUrl <- reactive({
     paste0(input$baseUrl, input$app, "/?",
            paste0(input$proxyUser, "=", input$user, "&",
