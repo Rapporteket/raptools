@@ -1,8 +1,8 @@
-# Define UI for dataset viewer app ----
+# Define UI for user simulation app ----
 ui <- fluidPage(
 
   # App title ----
-  titlePanel("Parameters"),
+  titlePanel("User data simulation"),
 
   # Sidebar layout with a input and output definitions ----
   sidebarLayout(
@@ -52,13 +52,11 @@ ui <- fluidPage(
       # Output tabular overview
       tableOutput("tab"),
 
-      # Output url
-      tags$h2("Link simulation"),
-      tags$br(),
+      tags$h2("Link app with simulated user data"),
       uiOutput("url"),
 
       # output http request
-      h2("Test of simulation if localhost"),
+      h2("Test of simulation if base url is localhost"),
       verbatimTextOutput("httpRequest")
 
     )
