@@ -25,7 +25,7 @@ ui <- fluidPage(
     mainPanel(
 
       # output
-      verbatimTextOutput("text")
+      textOutput("text")
 
     )
   )
