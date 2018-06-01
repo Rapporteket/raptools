@@ -1,6 +1,8 @@
 # Define UI for package install app ----
 ui <- fluidPage(
 
+  shinyjs::useShinyjs(),
+
   # App title ----
   titlePanel("Install package from GitHub"),
 
@@ -23,7 +25,7 @@ ui <- fluidPage(
     mainPanel(
 
       # output
-      verbatimTextOutput("out")
+      verbatimTextOutput("text")
 
     )
   )
