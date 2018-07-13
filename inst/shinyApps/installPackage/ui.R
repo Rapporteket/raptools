@@ -25,7 +25,10 @@ ui <- fluidPage(
     mainPanel(
 
       # output
-      textOutput("text")
+      p(em("System message:")),
+      verbatimTextOutput("sysMessage"),
+      p(em("Function message:")),
+      verbatimTextOutput("funMessage")
 
     )
   )
