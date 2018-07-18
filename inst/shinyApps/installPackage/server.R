@@ -1,6 +1,7 @@
 # Define server logic for installing packages
 
 library(httr)
+library(shinyjs)
 
 server <- function(input, output, session) {
 
