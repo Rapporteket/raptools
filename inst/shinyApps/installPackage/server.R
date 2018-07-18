@@ -16,4 +16,7 @@ server <- function(input, output, session) {
     })
   })
 
+  # test environ vars
+  output$confPath <- renderPrint(paste("Config path:", Sys.getenv("R_RAP_CONFIG_PATH")))
+
 }

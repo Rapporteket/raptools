@@ -28,7 +28,9 @@ ui <- fluidPage(
       p(em("System message:")),
       verbatimTextOutput("sysMessage"),
       p(em("Function message:")),
-      verbatimTextOutput("funMessage")
+      verbatimTextOutput("funMessage"),
+      p(em("Test env var:")),
+      verbatimTextOutput("confPath")
 
     )
   )
