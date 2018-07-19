@@ -56,7 +56,7 @@ ui <- fluidPage(
       uiOutput("url"),
 
       # output http request
-      h2("Test of simulation if base url is localhost"),
+      h2("Test of simulation if base url is myself (this app)"),
       verbatimTextOutput("httpRequest")
 
     )
