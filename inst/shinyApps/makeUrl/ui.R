@@ -14,7 +14,7 @@ ui <- fluidPage(
                 value = "http://127.0.0.1"),
       selectInput(inputId = "app",
                 label = "app:",
-                choices = c("", "/intensiv", "/nakke")),
+                choices = c("/makeUrl", "/intensiv", "/nakke")),
       selectInput(inputId = "user",
                   label = "user:",
                   choices = c("testUser1", "testUser2")),
