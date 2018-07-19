@@ -62,4 +62,23 @@ server <- function(input, output, session) {
   output$httpRequest <- renderPrint({
     parseQueryString(session$clientData$url_search)
   })
+
+  # Various calls for session data from rapbase
+  output$callUser <- renderText({
+    paste("rapbase::getShinyUserName(session, testCase = TRUE):",
+          rapbase::getShinyUserName(session, testCase = TRUE))
+  })
+  output$callGroups <- renderText({
+    paste("rapbase::getShinyUserGroups(session, testCase = TRUE):",
+          rapbase::getShinyUserGroups(session, testCase = TRUE))
+  })
+  output$callReshId <- renderText({
+    paste("rapbase::getShinyUserReshId(session, testCase = TRUE):",
+          rapbase::getShinyUserReshId(session, testCase = TRUE))
+  })
+  output$callRole <- renderText({
+    paste("rapbase::getShinyUserRole(session, testCase = TRUE):",
+          rapbase::getShinyUserRole(session, testCase = TRUE))
+  })
+
 }

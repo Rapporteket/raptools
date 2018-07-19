@@ -14,7 +14,7 @@ ui <- fluidPage(
                 value = "http://127.0.0.1"),
       selectInput(inputId = "app",
                 label = "app:",
-                choices = c("/makeUrl", "/intensiv", "/nakke")),
+                choices = c("", "/makeUrl", "/intensiv", "/nakke")),
       selectInput(inputId = "user",
                   label = "user:",
                   choices = c("testUser1", "testUser2")),
@@ -56,8 +56,15 @@ ui <- fluidPage(
       uiOutput("url"),
 
       # output http request
-      h2("Test of simulation if base url is myself (this app)"),
-      verbatimTextOutput("httpRequest")
+      # h2("Test of simulation if base url is myself (this app)"),
+      # verbatimTextOutput("httpRequest"),
+
+      # return from rapbase functions
+      h4("Use above url when linked to myself (this app) to test 'rapbase' functions:"),
+      textOutput("callUser"),
+      textOutput("callGroups"),
+      textOutput("callReshId"),
+      textOutput("callRole")
 
     )
   )
