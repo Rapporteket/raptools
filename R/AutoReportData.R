@@ -34,10 +34,15 @@ readAutoReportData <- function(fileName = "autoReport.yml", packageName = "rapto
 #' @inheritParams readAutoReportData
 #' @param config a list of yaml configuration
 #'
-#' @return
+#' @return NULL
 #' @export
 #'
 #' @examples
+#' \dontrun{
+#' config <- readAutoReportData()
+#' writeAutoReportData(config = config)
+#' }
+
 writeAutoReportData <- function(fileName = "autoReport.yml", config,
                                 packageName = "raptools") {
 
