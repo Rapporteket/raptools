@@ -50,7 +50,7 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
 
   if (path == "") {
     # for now, just write into installed package
-    con <- file(System.file(fileName, package = packageName), "w")
+    con <- file(system.file(fileName, package = packageName), "w")
   } else {
     # here, we need to make some sort of backup prior to write. Postphoned
     con <- file(normalizePath(paste0(path, "/", fileName)), "w")
