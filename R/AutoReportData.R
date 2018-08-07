@@ -50,9 +50,11 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
 
   if (path == "") {
     # for now, just write into installed package
-    yaml::write_yaml(config, system.file(fileName, packageName))
+    con <- file(fileName, "w")
   } else {
     # here, we need to make some sort of backup prior to write. Postphoned
-    yaml::write_yaml(config, normalizePath(paste0(path, "/", fileName)))
+    con <- file(normalizePath(paste0(path, "/", fileName)), "w")
   }
+  yaml::write_yaml(config, con)
+  close(con)
 }
