@@ -1,0 +1,12 @@
+somePackage:
+    run:day:
+    - 30
+    - 60
+    - 90
+    function: someFunction
+    params:
+      par1: are
+      par2: bere
+    email:
+    - someone@nowhere.com
+    - jesus@sky.com
