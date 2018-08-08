@@ -1,12 +1,29 @@
-somePackage:
-    run:day:
+testAutoReportFirst:
+  synopsis: This is the first test
+  packageName: raptools
+  functionCall: .testAutoReport
+  params:
+    - aNum: 1
+    - aChar: 'a'
+    - anExp: Sys.Date()
+  email:
+    - someone@nowhere.com
+    - jesus@sky.com
+  runDayOfYear:
+    - 30
+    - 60
+testAutoReportSecond:
+  synopsis: This is the second test
+  packageName: raptools
+  functionCall: .testAutoReport
+  params:
+    - aNum: 2
+    - aChar: 'B'
+    - anExp: sessionInfo()
+  email:
+    - someone@nowhere.com
+    - jesus@sky.com
+  runDayOfYear:
     - 30
     - 60
     - 90
-    function: someFunction
-    params:
-      par1: are
-      par2: bere
-    email:
-    - someone@nowhere.com
-    - jesus@sky.com
