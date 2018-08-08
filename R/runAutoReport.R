@@ -15,12 +15,17 @@
 
 .testAutoReport <- function(aNum = 1, aChar = "a", anExp = Sys.Date()) {
 
-  msg <- paste("These are the arguments provided:\n",
+  msg <- paste("This is a simple test of automated reports.\n",
+               "These are the arguments provided:\n",
                "aNum:", as.character(aNum), ",\n",
                "aChar:", aChar, ",\n",
                "anExp:", as.character(anExp), "\n")
+  fileName <- paste0(tempfile(), ".txt")
+  con <- file(fileName, "w")
+  cat(msg, file = fileName)
+  close(con)
 
-  message(msg)
+  fileName
 
 }
 
@@ -45,16 +50,22 @@
 
 
 
-#' Run reports as defined in yaml config
+#' Run reports as defined in yaml config and ship content by email
 #'
 #' Usually to be called by a scheduler, e.g. cron. If the provided day of
 #' year matches those of the config the report is run as otherwise specified in
-#' config
+#' config. Functions called upon are expected to return a path to a file that
+#' can be attached to an email. The email itself is defined and sent to
+#' recipients defined in the config
 #'
 #' @param dayNumber Integer day of year where January 1st is 1. Defaults to
 #' current day, i.e. as.POSIXlt(Sys.Date())$yday+1 (POSIXlt yday is base 0)
+#' @param dryRun Logical defining if emails are to be sent. If TRUE a message
+#' with reference to the payload file is given but no emails will actually be
+#' sent. Default is FALSE
 #'
-#' @return By itself nothing except whatever the called functions might provide
+#' @return Emails with corresponding file attachment. If dryRun == TRUE just a
+#' message
 #' @export
 #'
 #' @examples
@@ -62,7 +73,8 @@
 #' runAutoReport()
 #' }
 
-runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1) {
+runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1,
+                          dryRun = FALSE) {
 
   reps <- readAutoReportData()
 
@@ -71,7 +83,7 @@ runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1) {
     # get explicit referenced function
     f <- .getFun(paste0(rep$package, "::", rep$fun))
     if (dayNumber %in% rep$runDayOfYear) {
-      do.call(what = f, args = rep$params)
+      attFile <- do.call(what = f, args = rep$params)
     }
   }
 }
