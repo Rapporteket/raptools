@@ -47,7 +47,9 @@ runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1) {
   for (i in 1:length(reps)) {
     rep <- reps[[i]]
     if (dayNumber %in% rep$runDayOfYear) {
-      do.call(what = rep$functionCall, args = rep$params)
+      do.call(what = paste0(rep$packageName, rep$functionCall,
+                            collapse = "::"),
+              args = rep$params)
     }
   }
 }
