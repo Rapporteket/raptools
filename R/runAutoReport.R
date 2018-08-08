@@ -67,7 +67,7 @@ runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1) {
   for (i in 1:length(reps)) {
     rep <- reps[[i]]
     # get explicit referenced function
-    f <- .getFun(paste0(rep$packageName, rep$functionCall, collapse = "::"))
+    f <- .getFun(paste0(rep$packageName, "::", rep$functionCall))
     if (dayNumber %in% rep$runDayOfYear) {
       do.call(what = f, args = rep$params)
     }
