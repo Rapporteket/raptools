@@ -75,6 +75,7 @@
 runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1,
                           dryRun = FALSE) {
 
+  # get config
   reps <- readAutoReportData()
 
   for (i in 1:length(reps)) {
@@ -83,7 +84,19 @@ runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1,
     f <- .getFun(paste0(rep$package, "::", rep$fun))
     if (dayNumber %in% rep$runDayOfYear) {
       attFile <- do.call(what = f, args = rep$params)
-      print(attFile)
+      if (dryRun) {
+        message(paste("No emails sent. Attachment is", attFile))
+      } else {
+        # prepare email
+        from <- "<rapporteket@skde.no>"
+        to <- rep$email
+        subject <- rep$synopsis
+        body <- list("Works!", sendmailR::mime_part(attFile))
+        # ship the shite
+        sendmailR::sendmail(from, to, subject, body,
+                            control = list(smtpServer="localhost"))
+
+      }
     }
   }
 }
