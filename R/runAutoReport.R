@@ -15,8 +15,7 @@
 
 .testAutoReport <- function(aNum = 1, aChar = "a", anExp = Sys.Date()) {
 
-  msg <- paste("This is a simple test of automated reports.\n",
-               "These are the arguments provided:\n",
+  msg <- paste("This is a simple test of automated reports. Arguments provided:\n",
                "aNum:", as.character(aNum), ",\n",
                "aChar:", aChar, ",\n",
                "anExp:", as.character(anExp), "\n")
