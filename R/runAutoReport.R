@@ -47,8 +47,9 @@
 
 #' Run reports as defined in yaml config
 #'
-#' Usually to be called by a scheduler, e.g. cron. If the proveded day(s) of
-#' year matches the report is run as specified in config
+#' Usually to be called by a scheduler, e.g. cron. If the provided day of
+#' year matches those of the config the report is run as otherwise specified in
+#' config
 #'
 #' @param dayNumber Integer day of year where January 1st is 1. Defaults to
 #' current day, i.e. as.POSIXlt(Sys.Date())$yday+1 (POSIXlt yday is base 0)
@@ -68,7 +69,7 @@ runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1) {
   for (i in 1:length(reps)) {
     rep <- reps[[i]]
     # get explicit referenced function
-    f <- .getFun(paste0(rep$packageName, "::", rep$functionCall))
+    f <- .getFun(paste0(rep$package, "::", rep$fun))
     if (dayNumber %in% rep$runDayOfYear) {
       do.call(what = f, args = rep$params)
     }

@@ -1,7 +1,7 @@
 testAutoReportFirst:
   synopsis: This is the first test
-  packageName: raptools
-  functionCall: .testAutoReport
+  package: raptools
+  fun: .testAutoReport
   params:
     - aNum: 1
     - aChar: 'a'
@@ -14,8 +14,8 @@ testAutoReportFirst:
     - 60
 testAutoReportSecond:
   synopsis: This is the second test
-  packageName: raptools
-  functionCall: .testAutoReport
+  package: raptools
+  fun: .testAutoReport
   params:
     - aNum: 2
     - aChar: 'B'
