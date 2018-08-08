@@ -32,7 +32,7 @@
 #' @return value of the exported 'function' in 'package'
 #' @export
 
-.getFun<-function(x) {
+.getFun <- function(x) {
 
   if(length(grep("::", x))>0) {
     parts<-strsplit(x, "::")[[1]]
@@ -40,6 +40,7 @@
   } else {
     x
   }
+
 }
 
 
@@ -50,7 +51,7 @@
 #' year matches the report is run as specified in config
 #'
 #' @param dayNumber Integer day of year where January 1st is 1. Defaults to
-#' current day, i.e. as.POSIXlt(Sys.Date())$yday+1
+#' current day, i.e. as.POSIXlt(Sys.Date())$yday+1 (POSIXlt yday is base 0)
 #'
 #' @return By itself nothing except whatever the called functions might provide
 #' @export
