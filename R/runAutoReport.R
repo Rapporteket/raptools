@@ -78,6 +78,9 @@ runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1,
   # get config
   reps <- readAutoReportData()
 
+  # standard text for email body
+  stdTxt <- system.file("autoReportStandardEmailText. txt", package = "rapbase")
+
   for (i in 1:length(reps)) {
     rep <- reps[[i]]
     # get explicit referenced function
@@ -91,7 +94,7 @@ runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1,
         from <- "<rapporteket@skde.no>"
         to <- rep$email
         subject <- rep$synopsis
-        body <- list("Works!", sendmailR::mime_part(attFile))
+        body <- list(stdTxt, sendmailR::mime_part(attFile))
         # ship the shite
         sendmailR::sendmail(from, to, subject, body,
                             control = list(smtpServer="localhost"))
