@@ -24,6 +24,26 @@
 
 }
 
+
+#' Provide explicit reference to function for do.call
+#'
+#' @param x string with explicit reference, i.e. 'package::function'
+#'
+#' @return value of the exported 'function' in 'package'
+#' @export
+
+.getFun<-function(x) {
+
+  if(length(grep("::", x))>0) {
+    parts<-strsplit(x, "::")[[1]]
+    getExportedValue(parts[1], parts[2])
+  } else {
+    x
+  }
+}
+
+
+
 #' Run reports as defined in yaml config
 #'
 #' Usually to be called by a scheduler, e.g. cron. If the proveded day(s) of
@@ -46,10 +66,10 @@ runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1) {
 
   for (i in 1:length(reps)) {
     rep <- reps[[i]]
+    # get explicit referenced function
+    f <- .getFun(paste0(rep$packageName, rep$functionCall, collapse = "::"))
     if (dayNumber %in% rep$runDayOfYear) {
-      do.call(what = paste0(rep$packageName, rep$functionCall,
-                            collapse = "::"),
-              args = rep$params)
+      do.call(what = f, args = rep$params)
     }
   }
 }
