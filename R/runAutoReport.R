@@ -84,6 +84,7 @@ runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1,
     f <- .getFun(paste0(rep$package, "::", rep$fun))
     if (dayNumber %in% rep$runDayOfYear) {
       attFile <- do.call(what = f, args = rep$params)
+      print(attFile)
     }
   }
 }
