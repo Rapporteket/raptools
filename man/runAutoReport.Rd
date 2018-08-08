@@ -2,20 +2,28 @@
 % Please edit documentation in R/runAutoReport.R
 \name{runAutoReport}
 \alias{runAutoReport}
-\title{Run reports as defined in yaml config}
+\title{Run reports as defined in yaml config and ship content by email}
 \usage{
-runAutoReport(dayNumber = as.POSIXlt(Sys.Date())$yday + 1)
+runAutoReport(dayNumber = as.POSIXlt(Sys.Date())$yday + 1, dryRun = FALSE)
 }
 \arguments{
 \item{dayNumber}{Integer day of year where January 1st is 1. Defaults to
-current day, i.e. as.POSIXlt(Sys.Date())$yday+1}
+current day, i.e. as.POSIXlt(Sys.Date())$yday+1 (POSIXlt yday is base 0)}
+
+\item{dryRun}{Logical defining if emails are to be sent. If TRUE a message
+with reference to the payload file is given but no emails will actually be
+sent. Default is FALSE}
 }
 \value{
-By itself nothing except whatever the called functions might provide
+Emails with corresponding file attachment. If dryRun == TRUE just a
+message
 }
 \description{
-Usually to be called by a scheduler, e.g. cron. If the proveded day(s) of
-year matches the report is run as specified in config
+Usually to be called by a scheduler, e.g. cron. If the provided day of
+year matches those of the config the report is run as otherwise specified in
+config. Functions called upon are expected to return a path to a file that
+can be attached to an email. The email itself is defined and sent to
+recipients defined in the config
 }
 \examples{
 \dontrun{
