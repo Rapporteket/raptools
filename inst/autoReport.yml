@@ -7,8 +7,8 @@ testAutoReportFirst:
     - aChar: 'a'
     - anExp: Sys.Date()
   email:
-    - someone@nowhere.com
-    - jesus@sky.com
+    - Some One <someone@nowhere.com>
+    - Jesus <jesus@sky.com>
   runDayOfYear:
     - 30
     - 60
@@ -21,8 +21,8 @@ testAutoReportSecond:
     - aChar: 'B'
     - anExp: sessionInfo()
   email:
-    - someone@nowhere.com
-    - jesus@sky.com
+    - Some One <someone@nowhere.com>
+    - Jesus <jesus@sky.com>
   runDayOfYear:
     - 30
     - 60
