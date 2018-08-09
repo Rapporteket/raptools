@@ -6,6 +6,7 @@ Maintainer: Are Edvardsen <are.edvardsen@helse-nord.no>
 Description: Tools for working with Rapporteket. Mainly for developers.
 Depends: R (>= 3.4.4)
 Imports:
+  readr,
   sendmailR,
   shinyjs,
   yaml
