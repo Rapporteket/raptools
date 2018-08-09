@@ -79,7 +79,8 @@ runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1,
   reps <- readAutoReportData()
 
   # standard text for email body
-  stdTxt <- system.file("autoReportStandardEmailText. txt", package = "rapbase")
+  stdTxt <- readr::read_file(system.file("autoReportStandardEmailText. txt",
+                                         package = "rapbase"))
 
   for (i in 1:length(reps)) {
     rep <- reps[[i]]
