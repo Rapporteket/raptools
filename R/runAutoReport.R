@@ -93,7 +93,8 @@ runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1,
       } else {
         # prepare email
         from <- "<rapporteket@skde.no>"
-        to <- rep$email
+        # escape spaces (e.g. when full name is added to <email>)
+        to <- gsub(" ", "\\", rep$email, fixed = TRUE)
         subject <- rep$synopsis
         body <- list(stdTxt, sendmailR::mime_part(attFile))
         # ship the shite
