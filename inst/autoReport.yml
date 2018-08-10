@@ -1,10 +1,10 @@
 testAutoReportFirst:
-  synopsis: This is the first test
+  synopsis: Test, the first one
   package: raptools
   fun: .testAutoReport
   params:
     - aNum: 1
-    - aChar: 'a'
+    - aChar: a
     - anExp: Sys.Date()
   email:
     - Some One <someone@nowhere.com>
@@ -13,16 +13,16 @@ testAutoReportFirst:
     - 30
     - 60
 testAutoReportSecond:
-  synopsis: This is the second test
+  synopsis: Test, the second one
   package: raptools
   fun: .testAutoReport
   params:
-    - aNum: 2
-    - aChar: 'B'
+    - aNum: 2.0
+    - aChar: '3.14'
     - anExp: sessionInfo()
   email:
-    - Some One <someone@nowhere.com>
-    - Jesus <jesus@sky.com>
+    - <someone@nowhere.com>
+    - jesus@sky.com
   runDayOfYear:
     - 30
     - 60
