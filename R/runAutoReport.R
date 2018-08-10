@@ -76,6 +76,9 @@ runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1,
                           dryRun = FALSE) {
 
   # get config
+  conf <- rapbase::getConfig("rapbaseConfig.yml")
+
+  # get report candidates
   reps <- readAutoReportData()
 
   # standard text for email body
@@ -92,14 +95,16 @@ runAutoReport <- function(dayNumber = as.POSIXlt(Sys.Date())$yday+1,
         message(paste("No emails sent. Attachment is", attFile))
       } else {
         # prepare email
-        from <- "<rapporteket@skde.no>"
+        from <- conf$network$sender
         # escape spaces (e.g. when full name is added to <email>)
         to <- gsub(" ", "\\ ", rep$email, fixed = TRUE)
         subject <- rep$synopsis
         body <- list(stdTxt, sendmailR::mime_part(attFile))
         # ship the shite
-        sendmailR::sendmail(from, to, subject, body,
-                            control = list(smtpServer="localhost"))
+        sendmailR::sendmail(
+          from, to, subject, body,
+          control = list(smtpServer=conf$network$smtp$server,
+                         smtpPortSMTP=conf$network$smtp$port))
 
       }
     }
