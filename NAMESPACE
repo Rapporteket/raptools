@@ -2,7 +2,9 @@
 
 export(.getFun)
 export(.testAutoReport)
+export(calendarAutoReport)
 export(readAutoReportData)
 export(runAutoReport)
 export(static_help)
 export(writeAutoReportData)
+importFrom(magrittr,"%>%")
