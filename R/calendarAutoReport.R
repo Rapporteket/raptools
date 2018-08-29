@@ -35,8 +35,6 @@ calendarAutoReport <- function(runDayOfYear) {
   b$monthNum <- as.numeric(strftime(b$datetime, format = "%m"))
   b$monthName <- strftime(b$datetime, format = "%b")
   b$monthDayNum <- strftime(b$datetime, format = "%d")
-  #b <- plyr::ddply(b, .(yearMonthName), transform,
-  #                 weekOfMonth=1 + weekNum - min(weekNum))
   b <- dplyr::group_by(b, yearMonthName) %>%
     dplyr::mutate(., weekOfMonth=1 + weekNum - min(weekNum))
   # make numeric id for yearMontName
@@ -58,7 +56,7 @@ calendarAutoReport <- function(runDayOfYear) {
 
   # add autoReports dayly count
   # not needed ? b$autoReportCount <- rep(0, dim(b)[1])
-  b <- b %>% dplyr::left_join(autoReportCount)
+  b <- b %>% dplyr::left_join(autoReportCount, by = "dayOfYear")
 
   # plot object
   g <- ggplot2::ggplot(data = b, ggplot2::aes(x=weekOfMonth, y=dayName,
