@@ -43,9 +43,11 @@ calendarAutoReport <- function(runDayOfYear) {
   b$ymnId <- as.POSIXlt(b$datetime)$mon
 
   # make levels of montyear
+  # the first of current month
+  present <- as.Date(strftime(Sys.Date(), format = "%Y-%m-01"))
   b$yearMonthName <- factor(
     b$yearMonthName,
-    levels = strftime(seq(Sys.Date(), by = "month", length.out = 12),
+    levels = strftime(seq(present, by = "month", length.out = 12),
                       format = "%B %Y")
     )
 
