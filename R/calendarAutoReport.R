@@ -72,6 +72,6 @@ calendarAutoReport <- function(runDayOfYear) {
           panel.grid.minor = ggplot2::element_blank(),
           axis.text.x = ggplot2::element_blank()) +
     ggplot2::guides(fill=FALSE) +
-    ggplot2::labs(x = "Uke", y = "")
+    ggplot2::labs(x = "", y = "")
 
 }
