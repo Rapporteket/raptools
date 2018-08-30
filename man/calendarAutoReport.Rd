@@ -4,11 +4,15 @@
 \alias{calendarAutoReport}
 \title{Make calendar of report schedule and daily load}
 \usage{
-calendarAutoReport(runDayOfYear)
+calendarAutoReport(runDayOfYear, pointRangeMax = 0)
 }
 \arguments{
 \item{runDayOfYear}{Numeric vector of yeardays for which reports are to be
 run. May well contain repeating values}
+
+\item{pointRangeMax}{Integer to provide static range of geom_point as
+[1 pointRangeMax]. If set to 0 (default) the range of current data will be
+used.}
 }
 \value{
 a (gg)plot object
@@ -20,6 +24,8 @@ Make calendar of report schedule and daily load
 monthlyReport <- seq(from = 1, to = 365, by = 30)
 weeklyReport <- seq(from = 1, to = 365, by = 7)
 summerWeeklyReport <- seq(from = 130, to = 250, by = 7)
-calendarAutoReport(c(monthlyReport, weeklyReport, summerWeeklyReport))
+specialReport <- c(summerWeeklyReport, 150:170)
+rdoy <- c(monthlyReport, weeklyReport, summerWeeklyReport, specialReport)
+calendarAutoReport(rdoy)
 }
 
