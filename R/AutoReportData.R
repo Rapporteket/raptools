@@ -58,3 +58,47 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
   yaml::write_yaml(config, con)
   close(con)
 }
+
+
+#' Select data on one registry from config (list)
+#'
+#' Pick all config corresponding to a given registry. Registry name is not
+#' given as such, but rather as its corresponding R package name. Hence, a
+#' registry must be given as the name of its R package
+#'
+#' @param config list of configuration for automated reports
+#' @param reg string giving the exact name of the R package for the registry
+#'
+#' @return list witn config for registry reg
+#' @export
+
+selectByReg <- function(config, reg) {
+
+  ind <- integer()
+  for (i in 1:length(config)) {
+    if (config[[i]]$package == reg) {
+      ind <- c(ind, i)
+    }
+  }
+  c(config[ind])
+}
+
+
+
+#' Provide vector of registries (\emph{i.e.} their R packages) in config
+#'
+#' @param config list of configuration for automated reports
+#'
+#' @return character vector of rgistry (package) names
+#' @export
+
+getRegs <- function(config) {
+  regs <- vector(mode = "character")
+  for (i in 1:length(config)) {
+    reg <- config[[i]]$package
+    if (!(reg %in% regs)) {
+      regs <- c(regs, reg)
+    }
+  }
+  regs
+}
