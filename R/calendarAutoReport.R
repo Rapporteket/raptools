@@ -52,10 +52,12 @@ calendarAutoReport <- function(runDayOfYear, pointRangeMax = 0) {
                       format = "%B %Y")
     )
 
-  # make levels to get in right day name order, to be improved so independent
-  # of locale
-  b$dayName <- factor(b$dayName,
-                      levels = c("ma.", "ti.", "on.", "to.", "fr.", "lø.", "sø." ))
+  # make levels to get in right day name order
+  aMonday <- as.Date("2018-09-03")
+  followingSunday <- as.Date("2018-09-09")
+  weekDaySeq <- strftime(seq(aMonday, followingSunday, by = "day"),
+                         format = "%a")
+  b$dayName <- factor(b$dayName, levels = weekDaySeq)
 
   # add autoReports dayly count
   # not needed ? b$autoReportCount <- rep(0, dim(b)[1])
