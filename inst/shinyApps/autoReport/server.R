@@ -73,7 +73,7 @@ shinyServer(function(input, output, session) {
 
   # select days
   rdoy <- reactive({
-    if (!exists("input$rep")) {
+    if (length(input$rep) == 0) {
       unlist(sapply(r$rd, "[[", "runDayOfYear"), use.names = FALSE)
     } else {
       if (input$rep == "Alle") {
@@ -167,7 +167,7 @@ shinyServer(function(input, output, session) {
 
   # dynamic select reports present
   output$repControls <- renderUI({
-    if (length("input$reg") == 0) {
+    if (length(input$reg) == 0) {
       selectInput("rep", "Rapport", c("Alle"))
     } else {
       if (input$reg == "Alle") {
@@ -179,7 +179,8 @@ shinyServer(function(input, output, session) {
   })
 
   output$calendar <- renderPlot({
-    plot(calendarAutoReport(runDayOfYear = rdoy(), pointRangeMax = getMaxReps()))
+    plot(calendarAutoReport(runDayOfYear = rdoy(),
+                            pointRangeMax = getMaxReps()))
   })
 
 
