@@ -60,6 +60,7 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
     nameParts <- strsplit(fileName, "[.]")[[1]]
     bckFileName <- paste0(nameParts[1], tmpTag, ".", nameParts[-1])
     bckFile <- normalizePath(paste0(path, "/bck/", bckFileName))
+    print(bckFile)
     file.copy(from = oriFile, to = bckFile)
   }
   yaml::write_yaml(config, con)
