@@ -73,15 +73,19 @@ shinyServer(function(input, output, session) {
 
   # select days
   rdoy <- reactive({
-    if (input$rep == "Alle") {
-      dat <- rds()
-      if (length(dat) > 1) {
-        unlist(sapply(dat, "[[", "runDayOfYear"), use.names = FALSE)
-      } else {
-        dat[[1]]$runDayOfYear
-      }
+    if (!exists("input$rep")) {
+      unlist(sapply(r$rd, "[[", "runDayOfYear"), use.names = FALSE)
     } else {
-      rds()[[input$rep]]$runDayOfYear
+      if (input$rep == "Alle") {
+        dat <- rds()
+        if (length(dat) > 1) {
+          unlist(sapply(dat, "[[", "runDayOfYear"), use.names = FALSE)
+        } else {
+          dat[[1]]$runDayOfYear
+        }
+      } else {
+        rds()[[input$rep]]$runDayOfYear
+      }
     }
   })
 
@@ -163,10 +167,14 @@ shinyServer(function(input, output, session) {
 
   # dynamic select reports present
   output$repControls <- renderUI({
-    if (input$reg == "Alle") {
+    if (!exists("input$reg")) {
       selectInput("rep", "Rapport", c("Alle"))
     } else {
-      selectInput("rep", "Rapport", c("Alle", names(rds())))
+      if (input$reg == "Alle") {
+        selectInput("rep", "Rapport", c("Alle"))
+      } else {
+        selectInput("rep", "Rapport", c("Alle", names(rds())))
+      }
     }
   })
 
@@ -248,12 +256,12 @@ shinyServer(function(input, output, session) {
   })
 
   output$delRepControls <- renderUI({
-    if (exists("input$delReg")) {
-      tags$strong("Velg register!")
+    if (length(input$delReg) > 0) {
+      val <- names(selectByReg(r$rd, input$delReg))
     } else {
-      selectInput("delRep", "Velg rapport:",
-                  names(selectByReg(r$rd, input$delReg)))
+      val <- names(r$rd)
     }
+    selectInput("delRep", "Velg rapport:", val)
   })
 
   output$delSummary <- renderText({
