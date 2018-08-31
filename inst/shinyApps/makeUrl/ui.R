@@ -24,7 +24,7 @@ ui <- fluidPage(
                          selected = NULL),
       selectInput(inputId = "resh_id",
                   label = "resh_id:",
-                  choices = c("123456", "789012", "101619")),
+                  choices = c("123456", "789012", "101619", "102966")),
       selectInput(inputId = "role",
                   label = "role:",
                   choices = c("LU", "SC")),
