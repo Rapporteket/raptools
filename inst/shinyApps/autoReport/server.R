@@ -167,7 +167,7 @@ shinyServer(function(input, output, session) {
 
   # dynamic select reports present
   output$repControls <- renderUI({
-    if (!exists("input$reg")) {
+    if (length("input$reg") == 0) {
       selectInput("rep", "Rapport", c("Alle"))
     } else {
       if (input$reg == "Alle") {
