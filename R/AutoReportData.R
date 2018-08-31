@@ -53,7 +53,14 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
     con <- file(system.file(fileName, package = packageName), "w")
   } else {
     # here, we need to make some sort of backup prior to write. Postphoned
-    con <- file(normalizePath(paste0(path, "/", fileName)), "w")
+    oriFile <- normalizePath(paste0(path, "/", fileName))
+    con <- file(oriFile, "w")
+    # in case we screw-up, make a backup
+    tmpTag <- as.character(as.integer(as.POSIXct(Sys.time())))
+    nameParts <- strsplit(fileName, "[.]")
+    bckFileName <- paste0(nameParts[1], tmpTag, nameParts[2])
+    bckFile <- normalizePath(paste0(path, "/bck/", bckFileName))
+    file.copy(from = oriFile, to = bckFile)
   }
   yaml::write_yaml(config, con)
   close(con)
