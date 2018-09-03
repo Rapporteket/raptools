@@ -59,7 +59,7 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
     nameParts <- strsplit(fileName, "[.]")[[1]]
     bckFileName <- paste0(nameParts[1], tmpTag, ".", nameParts[-1])
     bckFilePath <- normalizePath(paste0(path, "/bck"))
-    file.copy(from = oriFile, to = bckFilePath)
+    file.copy(from = oriFile, to = bckFilePath, overwrite = TRUE)
     #file.rename(from = file.path(bckFilePath, fileName),
     #            to = file.path(bckFilePath, bckFileName))
   }
