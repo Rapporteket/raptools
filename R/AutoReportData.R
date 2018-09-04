@@ -59,8 +59,8 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
     bckFileName <- paste0(nameParts[1], tmpTag, ".", nameParts[-1])
     bckFilePath <- file.path(path, "bck")
     file.copy(from = oriFile, to = bckFilePath, overwrite = TRUE)
-    #file.rename(from = file.path(bckFilePath, fileName),
-    #            to = file.path(bckFilePath, bckFileName))
+    file.rename(from = file.path(bckFilePath, fileName),
+                to = file.path(bckFilePath, bckFileName))
     con <- file(oriFile, "w")
   }
   yaml::write_yaml(config, con)
