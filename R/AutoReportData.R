@@ -61,6 +61,11 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
     file.copy(from = oriFile, to = bckFilePath, overwrite = TRUE)
     file.rename(from = file.path(bckFilePath, fileName),
                 to = file.path(bckFilePath, bckFileName))
+    # to maintain some order, remove files older than 30 days
+    files <- file.info(list.files(bckFilePath, full.names = TRUE))
+    rmFiles <- rownames(files[difftime(Sys.time(), files[, "mtime"],
+                              units = "days") > 30, ])
+    file.remove(rmFiles)
     con <- file(oriFile, "w")
   }
   yaml::write_yaml(config, con)
