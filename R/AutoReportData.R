@@ -53,7 +53,6 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
     con <- file(system.file(fileName, package = packageName), "w")
   } else {
     oriFile <- file.path(path, fileName)
-    con <- file(oriFile, "w")
     # in case we screw-up, make a backup
     tmpTag <- as.character(as.integer(as.POSIXct(Sys.time())))
     nameParts <- strsplit(fileName, "[.]")[[1]]
@@ -62,6 +61,7 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
     file.copy(from = oriFile, to = bckFilePath, overwrite = TRUE)
     #file.rename(from = file.path(bckFilePath, fileName),
     #            to = file.path(bckFilePath, bckFileName))
+    con <- file(oriFile, "w")
   }
   yaml::write_yaml(config, con)
   close(con)
