@@ -13,7 +13,7 @@ ui <- fluidPage(
     sidebarPanel(
       selectInput(inputId = "package",
                 label = "Package:",
-                choices = c("NORIC", "nordummy", "rapbase", "raptools", "rapgen")),
+                choices = c("muskel", "intensiv", "Nakke", "NORIC", "nordummy", "rapbase", "raptools", "rapgen")),
       selectInput(inputId = "branch",
                   label = "Branch:",
                   choices = c("shinyfy", "rel", "master")),
