@@ -85,6 +85,8 @@ ui <- navbarPage(title = "RAPPORTEKET UI TEMPLATE", theme = "bootstrap.css",
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
 
+  test <- rapbase::getShinyUserName(session, testCase = TRUE)
+
   output$testSessionObj <- renderText({
     paste("username:", rapbase::getShinyUserName(session, testCase = TRUE),
           "groups:", rapbase::getShinyUserGroups(session, testCase = TRUE),
