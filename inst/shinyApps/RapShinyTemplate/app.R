@@ -9,7 +9,6 @@
 
 library(shiny)
 
-
 # Define UI for application that draws a histogram
 ui <- navbarPage(title = "RAPPORTEKET UI TEMPLATE", theme = "bootstrap.css",
   tabPanel("FigType 1",
