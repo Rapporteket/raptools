@@ -84,26 +84,29 @@ ui <- navbarPage(title = "RAPPORTEKET UI TEMPLATE", theme = "bootstrap.css",
 
 # Define server logic required to draw a histogram
 server <- function(input, output, session) {
-  
+
   output$testSessionObj <- renderText({
-    rapbase::getShinyUserName(session, testCase = TRUE)
+    paste("username:", rapbase::getShinyUserName(session, testCase = TRUE),
+          "groups:", rapbase::getShinyUserGroups(session, testCase = TRUE),
+          "role:", rapbase::getShinyUserRole(session, testCase = TRUE),
+          "reshId:", rapbase::getShinyUserReshId(session, testCase = TRUE))
   })
-  
+
   output$sampleUcControl <- renderUI({
     selectInput(inputId = "sampleUc", label = "Sample user ctrl",
                 choices = c("How", "it", "will", "look"))
   })
-  
+
   output$distPlot <- renderPlot({
     # generate bins based on input$bins from ui.R
-    x    <- faithful[, 2] 
+    x    <- faithful[, 2]
     bins <- seq(min(x), max(x), length.out = 10)
-    
+
     # draw the histogram with the specified number of bins
     hist(x, breaks = bins, col = 'darkgray', border = 'white')
   })
 }
 
-# Run the application 
+# Run the application
 shinyApp(ui = ui, server = server)
 
