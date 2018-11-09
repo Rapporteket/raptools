@@ -15,7 +15,7 @@ ui <- fluidPage(
       selectInput(inputId = "app",
                 label = "app:",
                 choices = c("", "/makeUrl", "/intensiv", "/nakke", "/noric",
-                            "/muskel", "/RapShinyTemplate")),
+                            "/muskel")),
       selectInput(inputId = "user",
                   label = "user:",
                   choices = c("testUser1", "testUser2")),
