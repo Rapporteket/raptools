@@ -11,6 +11,7 @@ Imports:
   readr,
   sendmailR,
   shinyjs,
+  shinythemes,
   yaml
 License: GPL-2
 Encoding: UTF-8
