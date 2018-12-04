@@ -14,7 +14,7 @@ ui <- fluidPage(
       selectInput(inputId = "package",
                 label = "Package:",
                 choices = c("intensiv", "muskel", "Nakke", "nger",
-                            "nordicscir", "NORIC", "nordummy", "rapbase",
+                            "nordicscir", "norgast", "NORIC", "nordummy", "rapbase",
                             "rapgen", "raptools")),
       selectInput(inputId = "branch",
                   label = "Branch:",
