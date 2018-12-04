@@ -8,9 +8,17 @@
 #
 
 library(shiny)
+library(rapbase)
+
+addResourcePath('rap', system.file('www', package='rapbase'))
+regTitle = "RAPPORTEKET UI TEMPLATE"
 
 # Define UI for application that draws a histogram
-ui <- navbarPage(title = "RAPPORTEKET UI TEMPLATE", theme = "bootstrap.css",
+ui <- navbarPage(
+    title = div(img(src="rap/logo.svg", alt="Rapporteket", height="26px"),
+                regTitle),
+    windowTitle = regTitle,
+    theme = "rap/bootstrap.css",
   tabPanel("FigType 1",
     tabsetPanel(
       tabPanel("Report 1a",
