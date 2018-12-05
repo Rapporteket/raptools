@@ -1,0 +1,41 @@
+---
+date: '`r format(Sys.time(), "%d %B, %Y")`'
+params:
+  title: "Navigasjon på 2 nivå"
+  author: "Rapporteket"
+  tableFormat: "html"
+header-includes:
+  - \usepackage[english, norsk]{babel}
+  - \usepackage{booktabs}
+  - \usepackage{rotating}
+title: "`r paste(params$title)`"
+author: "`r params$author`"
+---
+
+## Navigasjon på 3 nivå
+Dette oppsettet gir mulighet for navigasjon på tre nivåer. Overordnet nivå (1)
+er _navbar_ (her: "Form og farge", "Navigasjon i 2 nivå" og "Navigasjon i 3
+nivå"), mellomnivå (2) er første sett med arkfaner (her: "Rapport 2a",
+"Rapport 2b" og "Rapport 2c") og underordnet nivå (3) er et nytt sett arkfaner
+(her: "Figur", "Tabell" og "Vurdering"). Hvert enkelt sett av brukerkontroller
+(venstre kolonne) henger funksjonelt sammen med både nivå 2 og 3.
+
+### Tenkt bruk
+Nivå 1 kan representere grupper/kategorier/typer av rapporter og annet innhold
+som er relevant for hvert enkelt register på Rapporteket. Nivå 2 kan da brukes
+for å angi enkeltrapporter mens nivå 3 benyttes for å vise ulike
+utgaver/visninger for en og samme rapport. Denne type visning er i og for seg
+ikke brukt på Rapporteket idag, men fuksjonelt vil denne strukturen kunne
+gjenskape listen over alle rapporter slik den idag framstår gjennom Jasper
+Server.
+
+### Fordeler og ulemper
+Tre nivåer bør gi mer en nok handlingsrom til å håndtere navigasjon mellom alle
+informasjonselementer for hvert enkelt register. Hver enkelt rapport (og annen
+funksjonalitet) vil kunne fremstå direkte som egne og synlige innslag i
+knapper/arkfaner for navigasjon.
+
+Oppsettet framstår ikke som spesielt pent og det bruker mye "vertikal plass"
+som presser innholdet (hovedsaken) lengre ned på sida. Nivå 2 representerer et
+visuelt "brudd" mellom nivå 1 og 3 samt at brukerkonrollene blir hengende i
+løse lufta uten noen klar tilknytning til de andre elementene.
