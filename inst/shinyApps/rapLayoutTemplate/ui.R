@@ -29,7 +29,7 @@ ui <- tagList(
                       label = "Antall grupper:",
                       min = 1,
                       max = 50,
-                      value = 30)
+                      value = 20)
         ),
         mainPanel(
           tabsetPanel(
