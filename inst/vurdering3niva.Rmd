@@ -12,7 +12,7 @@ title: "`r paste(params$title)`"
 author: "`r params$author`"
 ---
 
-## Navigasjon på 3 nivå
+## Navigasjon i 3 nivå
 Dette oppsettet gir mulighet for navigasjon på tre nivåer. Overordnet nivå (1)
 er _navbar_ (her: "Form og farge", "Navigasjon i 2 nivå" og "Navigasjon i 3
 nivå"), mellomnivå (2) er første sett med arkfaner (her: "Rapport 2a",
