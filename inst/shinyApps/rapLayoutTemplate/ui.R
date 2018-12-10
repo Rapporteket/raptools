@@ -25,11 +25,14 @@ ui <- tagList(
     tabPanel("Navigasjon i 2 nivå",
       sidebarLayout(
         sidebarPanel(
+          selectInput(inputId = "var",
+                      label = "Variabel:",
+                      c("mpg", "disp", "hp", "drat", "wt", "qsec")),
           sliderInput(inputId = "bins",
                       label = "Antall grupper:",
                       min = 1,
-                      max = 50,
-                      value = 20)
+                      max = 10,
+                      value = 5)
         ),
         mainPanel(
           tabsetPanel(
@@ -49,8 +52,8 @@ ui <- tagList(
               sliderInput(inputId = "bins2",
                           label = "Antall grupper:",
                           min = 1,
-                          max = 50,
-                          value = 30)
+                          max = 10,
+                          value = 5)
             ),
             mainPanel(
               tabsetPanel(
