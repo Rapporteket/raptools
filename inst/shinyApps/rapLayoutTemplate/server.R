@@ -17,13 +17,15 @@ server <- function(input, output, session) {
       shiny::HTML()
   }
 
-  makeHist <- function(bins, makeTable = FALSE) {
-    x    <- faithful[, 2]
+  makeHist <- function(var, bins, makeTable = FALSE) {
+    x    <- mtcars[[var]]
     bins <- seq(min(x), max(x), length.out = bins +1)
-    t <- hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    t <- hist(x, breaks = bins, col = '#154ba2', border = 'white',
+              main = paste("Fordeling av", var), xlab = var,
+              ylab = "Antall")
     if (makeTable) {
       data.frame(GruppeMin=t$breaks[1:length(t$mids)],
-                 GruppeMax=t$breaks[2:(length(t$mids)+1)], N=t$counts)
+                 GruppeMax=t$breaks[2:(length(t$mids)+1)], Antall=t$counts)
     } else {
       t
     }
@@ -39,11 +41,11 @@ server <- function(input, output, session) {
   })
 
   output$distPlot <- renderPlot({
-    makeHist(bins = input$bins)
+    makeHist(var = input$var, bins = input$bins)
   })
 
   output$distTable <- renderTable({
-    makeHist(bins = input$bins, makeTable = TRUE)
+    makeHist(var = input$var, bins = input$bins, makeTable = TRUE)
   })
 
   output$vurdering2niva <- renderUI({
@@ -51,11 +53,11 @@ server <- function(input, output, session) {
   })
 
   output$distPlot2 <- renderPlot({
-    makeHist(bins = input$bins)
+    makeHist(var = "mpg", bins = input$bins2)
   })
 
   output$distTable2 <- renderTable({
-    makeHist(bins = input$bins2, makeTable = TRUE)
+    makeHist(var = "mpg", bins = input$bins2, makeTable = TRUE)
   })
 
   output$vurdering3niva <- renderUI({
