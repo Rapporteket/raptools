@@ -4,7 +4,9 @@ Version: 0.1
 Authors@R: "Are Edvardsen <are.edvardsen@helse-nord.no> [aut, cre]"
 Maintainer: Are Edvardsen <are.edvardsen@helse-nord.no>
 Description: Tools for working with Rapporteket. Mainly for developers.
-Depends: R (>= 3.4.4)
+Depends:
+  R (>= 3.4.4),
+  rapbase (>= 1.7.1)
 Imports:
   dplyr,
   magrittr,
@@ -13,6 +15,8 @@ Imports:
   shinyjs,
   shinythemes,
   yaml
+Remotes:
+    Rapporteket/rapbase@rel
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
