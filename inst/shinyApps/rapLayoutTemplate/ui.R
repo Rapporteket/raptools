@@ -14,7 +14,7 @@ ui <- tagList(
     windowTitle = regTitle,
     tabPanel("Form og farge",
       sidebarLayout(
-        sidebarPanel(
+        sidebarPanel(width = 3,
           textInput(inputId="test", label="Eksempel", value = "Hvasomhelst")
         ),
         mainPanel(
@@ -24,7 +24,7 @@ ui <- tagList(
     ),
     tabPanel("Navigasjon i 2 nivå",
       sidebarLayout(
-        sidebarPanel(
+        sidebarPanel(width = 3,
           selectInput(inputId = "var",
                       label = "Variabel:",
                       c("mpg", "disp", "hp", "drat", "wt", "qsec")),
@@ -48,7 +48,7 @@ ui <- tagList(
       tabsetPanel(
         tabPanel("Report 2a",
           sidebarLayout(
-            sidebarPanel(
+            sidebarPanel(width = 3,
               sliderInput(inputId = "bins2",
                           label = "Antall grupper:",
                           min = 1,
