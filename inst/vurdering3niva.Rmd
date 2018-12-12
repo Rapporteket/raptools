@@ -15,10 +15,11 @@ author: "`r params$author`"
 ## Navigasjon i 3 nivå
 Dette oppsettet gir mulighet for navigasjon på tre nivåer. Overordnet nivå (1)
 er _navbar_ (her: "Form og farge", "Navigasjon i 2 nivå" og "Navigasjon i 3
-nivå"), mellomnivå (2) er første sett med arkfaner (her: "Rapport 2a",
-"Rapport 2b" og "Rapport 2c") og underordnet nivå (3) er et nytt sett arkfaner
-(her: "Figur", "Tabell" og "Vurdering"). Hvert enkelt sett av brukerkontroller
-(venstre kolonne) henger funksjonelt sammen med både nivå 2 og 3.
+nivå"), mellomnivå (2) er første sett med arkfaner (her: "Fordeling av mpg",
+"Fordeling av hp", "Fordeling av wt" og "Vurdering") og underordnet nivå (3)
+er et nytt sett arkfaner (under hver enkelt rapport: "Figur" og "Tabell").
+Hvert enkelt sett av brukerkontroller (venstre kolonne) henger funksjonelt
+sammen med både nivå 2 og 3.
 
 ### Tenkt bruk
 Nivå 1 kan representere grupper/kategorier/typer av rapporter og annet innhold
