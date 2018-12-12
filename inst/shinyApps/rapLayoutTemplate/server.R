@@ -53,27 +53,27 @@ server <- function(input, output, session) {
   })
 
   output$distPlotMpg <- renderPlot({
-    makeHist(var = "mpg", bins = input$bins2)
+    makeHist(var = "mpg", bins = input$binsMpg)
   })
 
   output$distTableMpg <- renderTable({
-    makeHist(var = "mpg", bins = input$bins2, makeTable = TRUE)
+    makeHist(var = "mpg", bins = input$binsMpg, makeTable = TRUE)
   })
 
   output$distPlotHp <- renderPlot({
-    makeHist(var = "hp", bins = input$bins2)
+    makeHist(var = "hp", bins = input$binsHp)
   })
 
   output$distTableHp <- renderTable({
-    makeHist(var = "hp", bins = input$bins2, makeTable = TRUE)
+    makeHist(var = "hp", bins = input$binsHp, makeTable = TRUE)
   })
 
   output$distPlotWt <- renderPlot({
-    makeHist(var = "wt", bins = input$bins2)
+    makeHist(var = "wt", bins = input$binsWt)
   })
 
   output$distTableWt <- renderTable({
-    makeHist(var = "wt", bins = input$bins2, makeTable = TRUE)
+    makeHist(var = "wt", bins = input$binsWt, makeTable = TRUE)
   })
 
   output$vurdering3niva <- renderUI({

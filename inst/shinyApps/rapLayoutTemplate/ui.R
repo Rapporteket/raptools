@@ -49,7 +49,7 @@ ui <- tagList(
         tabPanel("Fordeling av mpg",
           sidebarLayout(
             sidebarPanel(width = 3,
-              sliderInput(inputId = "bins2",
+              sliderInput(inputId = "binsMpg",
                           label = "Antall grupper:",
                           min = 1,
                           max = 10,
@@ -66,7 +66,7 @@ ui <- tagList(
         tabPanel("Fordeling av hp",
           sidebarLayout(
             sidebarPanel(width = 3,
-              sliderInput(inputId = "bins2",
+              sliderInput(inputId = "binsHp",
                           label = "Antall grupper:",
                           min = 1,
                           max = 10,
@@ -83,7 +83,7 @@ ui <- tagList(
         tabPanel("Fordeling av wt",
           sidebarLayout(
             sidebarPanel(width = 3,
-              sliderInput(inputId = "bins2",
+              sliderInput(inputId = "binsWt",
                           label = "Antall grupper:",
                           min = 1,
                           max = 10,
