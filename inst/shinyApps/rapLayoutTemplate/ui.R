@@ -46,7 +46,7 @@ ui <- tagList(
     ),
     tabPanel("Navigasjon i 3 nivå",
       tabsetPanel(
-        tabPanel("Report 2a",
+        tabPanel("Fordeling av mpg",
           sidebarLayout(
             sidebarPanel(width = 3,
               sliderInput(inputId = "bins2",
@@ -57,36 +57,50 @@ ui <- tagList(
             ),
             mainPanel(
               tabsetPanel(
-                tabPanel("Figur", plotOutput("distPlot2")),
-                tabPanel("Tabell", tableOutput("distTable2")),
-                tabPanel("Vurdering",
-                         htmlOutput("vurdering3niva", inline = TRUE))
+                tabPanel("Figur", plotOutput("distPlotMpg")),
+                tabPanel("Tabell", tableOutput("distTableMpg"))
               )
             )
           )
         ),
-        tabPanel("Report 2b",
+        tabPanel("Fordeling av hp",
           sidebarLayout(
-            sidebarPanel("Med hensikt ingen visning"),
+            sidebarPanel(width = 3,
+              sliderInput(inputId = "bins2",
+                          label = "Antall grupper:",
+                          min = 1,
+                          max = 10,
+                          value = 5)
+            ),
             mainPanel(
               tabsetPanel(
-                tabPanel("Figur", "Med hensikt ingen visning"),
-                tabPanel("Tabell", "Med hensikt ingen visning"),
-                tabPanel("Vurdering", "Med hensikt ingen visning")
+                tabPanel("Figur", plotOutput("distPlotHp")),
+                tabPanel("Tabell", tableOutput("distTableHp"))
               )
             )
           )
         ),
-        tabPanel("Report 2c",
+        tabPanel("Fordeling av wt",
           sidebarLayout(
-            sidebarPanel("Med hensikt ingen visning"),
+            sidebarPanel(width = 3,
+              sliderInput(inputId = "bins2",
+                          label = "Antall grupper:",
+                          min = 1,
+                          max = 10,
+                          value = 5)
+            ),
             mainPanel(
               tabsetPanel(
-                tabPanel("Figur", "Med hensikt ingen visning"),
-                tabPanel("Tabell", "Med hensikt ingen visning"),
-                tabPanel("Vurdering", "Med hensikt ingen visning")
+                tabPanel("Figur", plotOutput("distPlotWt")),
+                tabPanel("Tabell", tableOutput("distTableWt"))
               )
             )
+          )
+        ),
+        tabPanel("Vurdering",
+          sidebarLayout(
+            sidebarPanel("Med hensikt ingen visning", width = 3),
+            mainPanel(htmlOutput("vurdering3niva", inline = TRUE))
           )
         )
       )

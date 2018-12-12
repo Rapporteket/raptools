@@ -52,12 +52,28 @@ server <- function(input, output, session) {
     htmlRenderRmd("vurdering2niva.Rmd")
   })
 
-  output$distPlot2 <- renderPlot({
+  output$distPlotMpg <- renderPlot({
     makeHist(var = "mpg", bins = input$bins2)
   })
 
-  output$distTable2 <- renderTable({
+  output$distTableMpg <- renderTable({
     makeHist(var = "mpg", bins = input$bins2, makeTable = TRUE)
+  })
+
+  output$distPlotHp <- renderPlot({
+    makeHist(var = "hp", bins = input$bins2)
+  })
+
+  output$distTableHp <- renderTable({
+    makeHist(var = "hp", bins = input$bins2, makeTable = TRUE)
+  })
+
+  output$distPlotWt <- renderPlot({
+    makeHist(var = "wt", bins = input$bins2)
+  })
+
+  output$distTableWt <- renderTable({
+    makeHist(var = "wt", bins = input$bins2, makeTable = TRUE)
   })
 
   output$vurdering3niva <- renderUI({
