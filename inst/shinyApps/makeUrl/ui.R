@@ -69,7 +69,9 @@ ui <- fluidPage(
       textOutput("callUser"),
       textOutput("callGroups"),
       textOutput("callReshId"),
-      textOutput("callRole")
+      textOutput("callRole"),
+
+      h4(paste("Testing shiny-server locale settings 'Sys.getlocale()':", Sys.getlocale()))
 
     )
   )
