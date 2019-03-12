@@ -1,5 +1,6 @@
 library(shiny)
 library(ggplot2)
+library(rapbase)
 library(raptools)
 library(yaml)
 
@@ -167,6 +168,11 @@ shinyServer(function(input, output, session) {
   # dynamic select registries present
   output$regControls <- renderUI({
     selectInput("reg", "Register", c("Alle", getRegs(r$rd)))
+  })
+
+  # dynamic select Rapporteket packages present
+  output$pkgControls <- renderUI({
+    selectInput("newReg", "Register:", getRapPackages())
   })
 
   # dynamic select reports present
