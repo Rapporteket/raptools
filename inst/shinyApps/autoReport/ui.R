@@ -27,8 +27,6 @@ shinyUI(
       sidebarLayout(
         sidebarPanel(
           uiOutput("pkgControls"),
-          #selectInput("newReg", "Register:",
-          #            c("raptools", "noric", "intensiv")),
           textInput("syn", "Tekstlig beskrivelse (emnefelt epost):",
                     "Rutinemessig rapport ang..."),
           uiOutput("regFunControls"),
