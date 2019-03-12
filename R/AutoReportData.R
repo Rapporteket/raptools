@@ -61,10 +61,11 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
     tmpTag <- as.character(as.integer(as.POSIXct(Sys.time())))
     nameParts <- strsplit(fileName, "[.]")[[1]]
     bckFileName <- paste0(nameParts[1], tmpTag, ".", nameParts[-1])
-    bckFilePath <- file.path(path, "bck")
-    file.copy(from = oriFile, to = bckFilePath, overwrite = TRUE)
-    file.rename(from = file.path(bckFilePath, fileName),
-                to = file.path(bckFilePath, bckFileName))
+    bckFilePath <- file.path(path, "autoReportBackup")
+    if (!dir.exists(bckFilePath)) {
+      dir.create(bckFilePath)
+    }
+    file.copy(from = oriFile, to = file.path(bckFilePath, bckFileName), overwrite = TRUE)
     # to maintain some order, remove files older than 30 days
     files <- file.info(list.files(bckFilePath, full.names = TRUE))
     rmFiles <- rownames(files[difftime(Sys.time(), files[, "mtime"],
