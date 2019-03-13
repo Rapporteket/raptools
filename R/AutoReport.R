@@ -17,9 +17,9 @@
 #' report
 #' @param runDayOfYear Integer vector with day numbers of the year when the
 #' report is to be run
-#' @param dryRun Logical defining if auto report config actually is to be
-#' updated. If set to TRUE the actual config (all of it) will be printed to the
-#' console. FALSE by default
+#' @param dryRun Logical defining if global auto report config actually is to
+#' be updated. If set to TRUE the actual config (all of it) will be printed to
+#' the console. FALSE by default
 #'
 #' @seealso \code{\link{deleteAutoReport}}
 #' @export
