@@ -57,6 +57,8 @@ shinyServer(function(input, output, session) {
       }
       newReportConfList$params <- paramsListVector
     }
+    # set owner
+    newReportConfList$owner <- getUserName(session)
     # set email
     newReportConfList$email <- sendTo$email
     # set run days
