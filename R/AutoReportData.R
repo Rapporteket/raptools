@@ -23,7 +23,7 @@ readAutoReportData <- function(fileName = "autoReport.yml", packageName = "rapto
   } else {
     if (!file.exists(file.path(path, fileName))) {
       warning(paste("No configuration file found in", path,
-                    "A new will be made from package default"))
+                    ". A new file will be made from the package default"))
       file.copy(system.file(fileName, package = packageName), path)
     }
     config_file <- file.path(path, fileName)
