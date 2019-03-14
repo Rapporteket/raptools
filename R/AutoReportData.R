@@ -87,7 +87,7 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
 #' @param config list of configuration for automated reports
 #' @param reg string giving the exact name of the R package for the registry
 #'
-#' @return list witn config for registry reg
+#' @return list with config for registry reg
 #' @export
 
 selectByReg <- function(config, reg) {
@@ -95,6 +95,28 @@ selectByReg <- function(config, reg) {
   ind <- integer()
   for (i in 1:length(config)) {
     if (config[[i]]$package == reg) {
+      ind <- c(ind, i)
+    }
+  }
+  c(config[ind])
+}
+
+
+#' Select data on one owner from config (list)
+#'
+#' Pick all config corresponding to a given owner (of the report)
+#'
+#' @param config list of configuration for automated reports
+#' @param owner string giving the exact name owner
+#'
+#' @return list with config for registry reg
+#' @export
+
+selectByOwner <- function(config, owner) {
+
+  ind <- integer()
+  for (i in 1:length(config)) {
+    if (config[[i]]$owner == owner) {
       ind <- c(ind, i)
     }
   }
