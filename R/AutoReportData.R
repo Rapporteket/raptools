@@ -109,7 +109,7 @@ selectByReg <- function(config, reg) {
 #' @param config list of configuration for automated reports
 #' @param owner string giving the exact name owner
 #'
-#' @return list with config for registry reg
+#' @return list with config for reports belonging to owner
 #' @export
 
 selectByOwner <- function(config, owner) {
