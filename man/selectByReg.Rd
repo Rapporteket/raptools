@@ -12,7 +12,7 @@ selectByReg(config, reg)
 \item{reg}{string giving the exact name of the R package for the registry}
 }
 \value{
-list witn config for registry reg
+list with config for registry reg
 }
 \description{
 Pick all config corresponding to a given registry. Registry name is not
