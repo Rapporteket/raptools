@@ -75,7 +75,7 @@ deleteAutoReport <- function(autoReportId) {
   stopifnot(!is.null(rd[[autoReportId]]))
   ind <- names(rd) == autoReportId
   rd <- rd[!ind]
-  writeAutoReportData(rd)
+  writeAutoReportData(config = rd)
 
 }
 
