@@ -78,3 +78,34 @@ deleteAutoReport <- function(autoReportId) {
   writeAutoReportData(rd)
 
 }
+
+#' Make a sequence of day numbers from av given date and interval
+#'
+#' This function provides an even sequence of day numbers spanning 365/366
+#' days from the start date and interval provided. Mainly to be used in
+#' setting up automated reports at Rapporteket
+#'
+#' @param startDay Start date of sequence. May be provided as a string,
+#' \emp{e.g.} \"2019-03-17\" or as class \"Date\". Defaults to today
+#' @param interval String representing a valid seq.POSIXt interval such as
+#' \"DSTday\", \"week\", \"month\", \"quarter\" or \"year\")
+#'
+#' @return Integer vector of day numbers
+#' @export
+#'
+#' @examples
+#' makeRunDayOfYearSequence(interval = "month")
+#'
+makeRunDayOfYearSequence <- function(startDay = Sys.Date(), interval) {
+
+  # set end to a year from start
+  start <- as.POSIXlt(startDay)
+  end <- start
+  end$year <- end$year + 1
+  s <- seq(from = start, to = end, by = interval)
+  # skip redundant end value
+  if (length(s) > 1) {
+    s <- s[1:length(s)-1]
+  }
+  unique(as.integer(format(s, "%j")))
+}
