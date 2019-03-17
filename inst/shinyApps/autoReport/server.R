@@ -142,14 +142,8 @@ shinyServer(function(input, output, session) {
   })
 
   observeEvent(input$setDays, {
-    # set end to a year from start
-    start <- as.POSIXlt(input$from)
-    end <- start
-    end$year <- end$year + 1
-    # skip last day
-    end$yday <- end$yday - 1
-    s <- seq(from = start, to = end, by = input$interval)
-    auto$days <- unique(as.integer(format(s, "%j")))
+    auto$days <- makeRunDayOfYearSequence(startDay = input$from,
+                                          interval = input$interval)
   })
 
   observeEvent(input$addReport, {
