@@ -9,6 +9,7 @@ Depends:
   rapbase (>= 1.7.1)
 Imports:
   dplyr,
+  digest,
   magrittr,
   readr,
   sendmailR,
@@ -23,3 +24,4 @@ LazyData: true
 URL: http://github.com/Rapporteket/raptools
 BugReports: http://github.com/Rapporteket/raptools/issues
 Suggests: testthat
+RoxygenNote: 6.1.1

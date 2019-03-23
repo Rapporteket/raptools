@@ -1,5 +1,6 @@
 library(shiny)
 library(ggplot2)
+library(rapbase)
 library(raptools)
 library(yaml)
 
@@ -56,6 +57,8 @@ shinyServer(function(input, output, session) {
       }
       newReportConfList$params <- paramsListVector
     }
+    # set owner
+    newReportConfList$owner <- getUserName(session)
     # set email
     newReportConfList$email <- sendTo$email
     # set run days
@@ -139,14 +142,8 @@ shinyServer(function(input, output, session) {
   })
 
   observeEvent(input$setDays, {
-    # set end to a year from start
-    start <- as.POSIXlt(input$from)
-    end <- start
-    end$year <- end$year + 1
-    # skip last day
-    end$yday <- end$yday - 1
-    s <- seq(from = start, to = end, by = input$interval)
-    auto$days <- unique(as.integer(format(s, "%j")))
+    auto$days <- makeRunDayOfYearSequence(startDay = input$from,
+                                          interval = input$interval)
   })
 
   observeEvent(input$addReport, {
@@ -167,6 +164,11 @@ shinyServer(function(input, output, session) {
   # dynamic select registries present
   output$regControls <- renderUI({
     selectInput("reg", "Register", c("Alle", getRegs(r$rd)))
+  })
+
+  # dynamic select Rapporteket packages present
+  output$pkgControls <- renderUI({
+    selectInput("newReg", "Register:", getRapPackages())
   })
 
   # dynamic select reports present

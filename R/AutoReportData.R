@@ -21,7 +21,11 @@ readAutoReportData <- function(fileName = "autoReport.yml", packageName = "rapto
     stopifnot(file.exists(system.file(fileName, package = packageName)))
     config_file <- system.file(fileName, package = packageName)
   } else {
-    stopifnot(file.exists(file.path(path, fileName)))
+    if (!file.exists(file.path(path, fileName))) {
+      warning(paste("No configuration file found in", path,
+                    ". A new file will be made from the package default"))
+      file.copy(system.file(fileName, package = packageName), path)
+    }
     config_file <- file.path(path, fileName)
   }
 
@@ -57,10 +61,11 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
     tmpTag <- as.character(as.integer(as.POSIXct(Sys.time())))
     nameParts <- strsplit(fileName, "[.]")[[1]]
     bckFileName <- paste0(nameParts[1], tmpTag, ".", nameParts[-1])
-    bckFilePath <- file.path(path, "bck")
-    file.copy(from = oriFile, to = bckFilePath, overwrite = TRUE)
-    file.rename(from = file.path(bckFilePath, fileName),
-                to = file.path(bckFilePath, bckFileName))
+    bckFilePath <- file.path(path, "autoReportBackup")
+    if (!dir.exists(bckFilePath)) {
+      dir.create(bckFilePath)
+    }
+    file.copy(from = oriFile, to = file.path(bckFilePath, bckFileName), overwrite = TRUE)
     # to maintain some order, remove files older than 30 days
     files <- file.info(list.files(bckFilePath, full.names = TRUE))
     rmFiles <- rownames(files[difftime(Sys.time(), files[, "mtime"],
@@ -82,7 +87,7 @@ writeAutoReportData <- function(fileName = "autoReport.yml", config,
 #' @param config list of configuration for automated reports
 #' @param reg string giving the exact name of the R package for the registry
 #'
-#' @return list witn config for registry reg
+#' @return list with config for registry reg
 #' @export
 
 selectByReg <- function(config, reg) {
@@ -90,6 +95,28 @@ selectByReg <- function(config, reg) {
   ind <- integer()
   for (i in 1:length(config)) {
     if (config[[i]]$package == reg) {
+      ind <- c(ind, i)
+    }
+  }
+  c(config[ind])
+}
+
+
+#' Select data on one owner from config (list)
+#'
+#' Pick all config corresponding to a given owner (of the report)
+#'
+#' @param config list of configuration for automated reports
+#' @param owner string giving the exact name owner
+#'
+#' @return list with config for reports belonging to owner
+#' @export
+
+selectByOwner <- function(config, owner) {
+
+  ind <- integer()
+  for (i in 1:length(config)) {
+    if (config[[i]]$owner == owner) {
       ind <- c(ind, i)
     }
   }
