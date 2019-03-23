@@ -12,6 +12,7 @@ ui <- tagList(
     title = div(img(src="rap/logo.svg", alt="Rapporteket", height="26px"),
                 regTitle),
     windowTitle = regTitle,
+
     tabPanel("Form og farge",
       sidebarLayout(
         sidebarPanel(width = 3,
@@ -104,6 +105,9 @@ ui <- tagList(
           )
         )
       )
-    )
+    ),
+    tags$script(HTML("var header = $('.navbar> .container-fluid');
+                       header.append('<div style=\"float:right\">Company name<br>text here</div>');
+                       console.log(header)"))
   )
 )
