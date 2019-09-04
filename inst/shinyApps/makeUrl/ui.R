@@ -71,7 +71,12 @@ ui <- fluidPage(
       textOutput("callReshId"),
       textOutput("callRole"),
 
-      h4(paste("Testing shiny-server locale settings 'Sys.getlocale()':", Sys.getlocale()))
+      h4("Testing shiny-server locale settings 'Sys.getlocale()'"),
+      p(Sys.getlocale()),
+
+      h4("Testing shiny-server environment vars"),
+      p(paste("R_RAP_CONFIG_PATH:", Sys.getenv("R_RAP_CONFIG_PATH"))),
+      p(paste("R_RAP_INSTANCE:", Sys.getenv("R_RAP_INSTANCE")))
 
     )
   )
