@@ -65,20 +65,20 @@ server <- function(input, output, session) {
 
   # Various calls for session data from rapbase
   output$callUser <- renderText({
-    paste("rapbase::getShinyUserName(session, testCase = TRUE):",
-          rapbase::getShinyUserName(session, testCase = TRUE))
+    paste("rapbase::getUserName():",
+          rapbase::getUserName())
   })
   output$callGroups <- renderText({
-    paste("rapbase::getShinyUserGroups(session, testCase = TRUE):",
-          rapbase::getShinyUserGroups(session, testCase = TRUE))
+    paste("rapbase::getUserGroups():",
+          rapbase::getUserGroups())
   })
   output$callReshId <- renderText({
-    paste("rapbase::getShinyUserReshId(session, testCase = TRUE):",
-          rapbase::getShinyUserReshId(session, testCase = TRUE))
+    paste("rapbase::getUserReshId():",
+          rapbase::getUserReshId())
   })
   output$callRole <- renderText({
-    paste("rapbase::getShinyUserRole(session, testCase = TRUE):",
-          rapbase::getShinyUserRole(session, testCase = TRUE))
+    paste("rapbase::getUserRole():",
+          rapbase::getUserRole())
   })
 
 }
