@@ -18,7 +18,7 @@ ui <- fluidPage(
                             "rapgen", "raptools", "raplog")),
       selectInput(inputId = "branch",
                   label = "Branch:",
-                  choices = c("shinyfy", "rel", "master")),
+                  choices = c("shinyfy", "rel", "master", "yt")),
       actionButton(inputId = "install",
                    label = "Install")
     ),
