@@ -1,3 +1,5 @@
+library(rapbase)
+
 addResourcePath('rap', system.file('www', package='rapbase'))
 appTitle = "Swiss army knife"
 
@@ -33,7 +35,11 @@ ui <- tagList(
           p(em("Function message:")),
           verbatimTextOutput("funMessage"),
           p(em("Test env var:")),
-          verbatimTextOutput("confPath")
+          verbatimTextOutput("confPath"),
+          appNavbarUserWidget(user = uiOutput("appUserName"),
+                              organization = uiOutput("appOrgName"),
+                              addUserInfo = TRUE),
+          tags$head(tags$link(rel="shortcut icon", href="rap/favicon.ico"))
 
         )
       )

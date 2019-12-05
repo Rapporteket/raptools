@@ -64,4 +64,10 @@ server <- function(input, output, session) {
     Sys.getlocale()
   })
 
+  # widget
+  output$appUserName <- renderText(getUserFullName(session))
+  output$appOrgName <- renderText(paste(getUserReshId(session),
+                                        getUserRole(session),
+                                        sep = ", "))
+
 }
