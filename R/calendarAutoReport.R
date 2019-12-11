@@ -82,5 +82,5 @@ calendarAutoReport <- function(runDayOfYear, pointRangeMax = 0) {
   if (pointRangeMax > 0) {
     g <- g + ggplot2::scale_size_continuous(limits = c(1, pointRangeMax))
   }
-
+  return(g)
 }
