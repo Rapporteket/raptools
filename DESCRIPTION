@@ -17,7 +17,7 @@ Imports:
   shinythemes,
   yaml
 Remotes:
-    Rapporteket/rapbase@rel
+    Rapporteket/rapbase
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
