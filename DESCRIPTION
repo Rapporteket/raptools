@@ -5,13 +5,14 @@ Authors@R: "Are Edvardsen <are.edvardsen@helse-nord.no> [aut, cre]"
 Maintainer: Are Edvardsen <are.edvardsen@helse-nord.no>
 Description: Tools for working with Rapporteket. Mainly for developers.
 Depends:
-  R (>= 3.4.4),
-  rapbase (>= 1.7.1)
+  R (>= 3.4.4)
 Imports:
   dplyr,
   digest,
   magrittr,
+  rapbase,
   readr,
+  remotes,
   sendmailR,
   shinyjs,
   shinythemes,
