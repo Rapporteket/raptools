@@ -21,7 +21,7 @@ ui <- tagList(
                       label = "Package:",
                       choices = c("intensiv", "muskel", "Nakke", "nger",
                                   "nordicscir", "norgast", "NORIC", "nordummy", "rapbase",
-                                  "rapgen", "raptools", "raplog", "hisreg", "norspis")),
+                                  "rapgen", "raptools", "raplog", "hisreg", "norspis", "nra")),
           selectInput(inputId = "branch",
                       label = "Branch:",
                       choices = c("shinyfy", "rel", "master", "yt")),
