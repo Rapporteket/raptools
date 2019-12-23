@@ -5,18 +5,19 @@ Authors@R: "Are Edvardsen <are.edvardsen@helse-nord.no> [aut, cre]"
 Maintainer: Are Edvardsen <are.edvardsen@helse-nord.no>
 Description: Tools for working with Rapporteket. Mainly for developers.
 Depends:
-  R (>= 3.4.4)
+  R (>= 3.5.0)
 Imports:
-  dplyr,
-  digest,
-  magrittr,
-  rapbase,
-  readr,
-  remotes,
-  sendmailR,
-  shinyjs,
-  shinythemes,
-  yaml
+    dplyr,
+    digest,
+    magrittr,
+    rapbase,
+    readr,
+    remotes,
+    sendmailR,
+    shinyjs,
+    shinythemes,
+    yaml,
+    ggplot2
 Remotes:
     Rapporteket/rapbase
 License: GPL-2
@@ -25,4 +26,4 @@ LazyData: true
 URL: http://github.com/Rapporteket/raptools
 BugReports: http://github.com/Rapporteket/raptools/issues
 Suggests: testthat
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.1
