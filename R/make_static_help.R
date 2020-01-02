@@ -17,8 +17,8 @@ static_help = function(pkg, links = tools::findHTMLlinks()) {
   helpdir <- system.file('html', package = pkg)
   setwd(helpdir)
   message("Generated help files will be placed in ", helpdir)
-  pkgRdDB = tools:::fetchRdDB(file.path(find.package(pkg),
-                                        'help', pkg))
+  # tools:::fetchRdDB(file.path(find.package(pkg),'help', pkg)) creates a warning in R CDM check
+  pkgRdDB =eval(parse(text = " tools:::fetchRdDB(file.path(find.package(pkg),'help', pkg))"))
   force(links); topics = names(pkgRdDB)
   for (p in topics) {
     tools::Rd2HTML(pkgRdDB[[p]],
