@@ -1,0 +1,9 @@
+---
+title: "Informasjon"
+author: "raptools"
+date: "12/19/2019"
+output: html_document
+---
+
+## Med makt følger ansvar
+Det du har forran deg nå er en samling verktøy som lar deg endre på ting som andre benytter og er avhengig av. Verktøykassen skal gi deg muligheten til å justere og forbedre eller fikse feil. Uvettig bruk kan gi alvorlige følger som kan gå ut over andre. Vit derfor godt hva du holder på med og tenk deg nøye om før du gyver løs.
