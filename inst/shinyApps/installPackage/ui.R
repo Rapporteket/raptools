@@ -69,13 +69,7 @@ ui <- tagList(
     shiny::tabPanel("Log",
       shiny::mainPanel(
         fluidRow(
-          shiny::selectInput(
-            inputId = "selectLog",
-            label = "Log:",
-            choices = list(
-              "Application level" = "app",
-              "Report level"="report")
-        )
+          shiny::uiOutput("logSelector")
        ),
        fluidRow(shiny::column(12,
          rpivotTable::rpivotTableOutput("logPivottTable"))
