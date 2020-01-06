@@ -17,7 +17,9 @@ Imports:
     shinyjs,
     shinythemes,
     yaml,
-    ggplot2
+    ggplot2,
+    lubridate,
+    rpivotTable
 Remotes:
     Rapporteket/rapbase
 License: GPL-2
