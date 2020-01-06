@@ -2,6 +2,9 @@
 
 library(httr)
 library(shinyjs)
+library(lubridate)
+library(dplyr)
+library(rpivotTable)
 
 server <- function(input, output, session) {
 
@@ -70,4 +73,30 @@ server <- function(input, output, session) {
                                         getUserRole(session),
                                         sep = ", "))
 
+  #------------Logwatcher-----
+  output$logSelector <- renderUI(
+    shiny::selectInput(
+      inputId = "selectLog",
+      label = "Log:",
+      choices = list(
+        "Application level" = "app",
+        "Report level"="report")
+    )
+  )
+
+  logData <- reactive(
+    raptools::getLogData(req(input$selectLog)) %>%
+      dplyr::mutate(
+        time = as.POSIXct(time),
+        year = lubridate::year(time),
+        month = lubridate::month(time),
+        day = lubridate::day(time),
+        weekday = lubridate::wday(
+          time,
+          week_start = 1,
+          abbr =FALSE))
+  )
+  output$logPivottTable <- rpivotTable::renderRpivotTable(
+    rpivotTable::rpivotTable(logData())
+  )
 }
