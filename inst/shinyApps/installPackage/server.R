@@ -70,4 +70,8 @@ server <- function(input, output, session) {
                                         getUserRole(session),
                                         sep = ", "))
 
+  #------------Logwatcher-----
+  output$logPivottTable <- rpivotTable::renderRpivotTable(
+    rpivotTable::rpivotTable(raptools::getLogData(input$selectLog))
+  )
 }

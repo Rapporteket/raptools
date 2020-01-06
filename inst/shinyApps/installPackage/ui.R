@@ -1,4 +1,5 @@
 library(rapbase)
+library(rpivotTable)
 
 addResourcePath('rap', system.file('www', package='rapbase'))
 appTitle = "Swiss army knife"
@@ -63,6 +64,22 @@ ui <- tagList(
         textOutput("envConfigPath"),
         h4("Locale settings:"),
         textOutput("locale")
+      )
+    ),
+    shiny::tabPanel("Log",
+      shiny::mainPanel(
+        fluidRow(
+          shiny::selectInput(
+            inputId = "selectLog",
+            label = "Log:",
+            choices = list(
+              "Application level" = "app",
+              "Report level"="report")
+        )
+       ),
+       fluidRow(shiny::column(12,
+         rpivotTable::rpivotTableOutput("logPivottTable"))
+       )
       )
     )
   ) # navbarPage
