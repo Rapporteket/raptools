@@ -2,16 +2,17 @@
 % Please edit documentation in R/getLogData.R
 \name{getLogData}
 \alias{getLogData}
-\title{Get app or report log data}
+\title{Get app or report log}
 \usage{
 getLogData(log)
 }
 \arguments{
-\item{log}{a string that determines which log to retrieve. It can be either "report" or "app"}
+\item{log}{a string that determines which log to retrieve.
+It can be either "report" or "app"}
 }
 \value{
 reportLog or appLog depending on the input
 }
 \description{
-Get app or report log data
+Get app or report log
 }
