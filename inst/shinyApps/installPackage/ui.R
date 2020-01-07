@@ -1,5 +1,6 @@
 library(rapbase)
 library(rpivotTable)
+library(magrittr)
 
 addResourcePath('rap', system.file('www', package='rapbase'))
 appTitle = "Swiss army knife"
@@ -38,7 +39,11 @@ ui <- tagList(
                h4("Environmental var R_RAP_CONFIG_PATH:"),
                textOutput("envConfigPath"),
                h4("Locale settings:"),
-               textOutput("locale")
+               textOutput("locale"),
+               appNavbarUserWidget(user = uiOutput("appUserName"),
+                                   organization = uiOutput("appOrgName"),
+                                   addUserInfo = TRUE),
+               tags$head(tags$link(rel="shortcut icon", href="rap/favicon.ico"))
              )
     ),
     tabPanel("Install package from GitHub",
@@ -54,20 +59,14 @@ ui <- tagList(
                                   "hisreg", "norspis", "nra", "smerte",
                                   "rygg")),
           uiOutput("branchSelector"),
-          actionButton(inputId = "install",
-                       label = "Install")
+          uiOutput("installButton")
         ),
         mainPanel(
-        # output
+          uiOutput("checklist"),
           p(em("System message:")),
           verbatimTextOutput("sysMessage"),
           p(em("Function message:")),
-          verbatimTextOutput("funMessage"),
-          appNavbarUserWidget(user = uiOutput("appUserName"),
-                              organization = uiOutput("appOrgName"),
-                              addUserInfo = TRUE),
-          tags$head(tags$link(rel="shortcut icon", href="rap/favicon.ico"))
-
+          verbatimTextOutput("funMessage")
         )
       )
     ),

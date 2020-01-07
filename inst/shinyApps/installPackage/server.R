@@ -5,6 +5,8 @@ library(shinyjs)
 library(lubridate)
 library(dplyr)
 library(rpivotTable)
+library(rapbase)
+library(magrittr)
 
 server <- function(input, output, session) {
 
@@ -68,6 +70,13 @@ server <- function(input, output, session) {
 
 
   # Install packages
+  if (instance == "PRODUCTION") {
+    checklist <- prodChecklist
+  }
+  if (instance == "QA") {
+    checklist <- qaChecklist
+  }
+
   output$branchSelector <- renderUI(
     switch (instance,
       DEV = textInput(inputId = "branch", label = "Grein:"),
@@ -77,6 +86,29 @@ server <- function(input, output, session) {
       PRODUCTION = selectInput(inputId = "branch", label = "Grein:",
                                choices = c("master"))
     )
+  )
+
+  output$checklist <- renderUI(
+    if (exists('checklist')) {
+      checkboxGroupInput(inputId = "manControl",
+                         label = "Sjekk at du faktisk har:",
+                         choices = checklist)
+    } else {
+      NULL
+    }
+  )
+
+  output$installButton <- renderUI(
+    if (exists('checklist')) {
+      if (length(input$manControl) == length(checklist)) {
+        actionButton(inputId = "install", label = "Install")
+      } else {
+        NULL
+      }
+    } else {
+      actionButton(inputId = "install", label = "Install")
+    }
+
   )
 
   installPackage <- observeEvent(input$install, {
