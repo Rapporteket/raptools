@@ -1,7 +1,11 @@
 Package: raptools
 Title: Tools for Rapporteket development
 Version: 0.1
-Authors@R: "Are Edvardsen <are.edvardsen@helse-nord.no> [aut, cre]"
+Authors@R: c(
+    person(given = "Are",
+           family = "Edvardsen",
+           role = c("aut", "cre"),
+           email = "biorakel@gmail.com",
 Maintainer: Are Edvardsen <are.edvardsen@helse-nord.no>
 Description: Tools for working with Rapporteket. Mainly for developers.
 Depends:
