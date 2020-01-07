@@ -53,9 +53,7 @@ ui <- tagList(
                                   "rapbase", "rapgen", "raplog",
                                   "hisreg", "norspis", "nra", "smerte",
                                   "rygg")),
-          selectInput(inputId = "branch",
-                      label = "Branch:",
-                      choices = c("shinyfy", "rel", "master", "yt")),
+          uiOutput("branchSelector"),
           actionButton(inputId = "install",
                        label = "Install")
         ),
@@ -65,7 +63,6 @@ ui <- tagList(
           verbatimTextOutput("sysMessage"),
           p(em("Function message:")),
           verbatimTextOutput("funMessage"),
-          p(em("Test env var:")),
           appNavbarUserWidget(user = uiOutput("appUserName"),
                               organization = uiOutput("appOrgName"),
                               addUserInfo = TRUE),

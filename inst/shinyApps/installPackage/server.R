@@ -68,6 +68,17 @@ server <- function(input, output, session) {
 
 
   # Install packages
+  output$branchSelector <- renderUI(
+    switch (instance,
+      DEV = textInput(inputId = "branch", label = "Grein:"),
+      TEST = textInput(inputId = "branch", label = "Grein:"),
+      QA = selectInput(inputId = "branch", label = "Grein:",
+                       choices = c("master", "rel")),
+      PRODUCTION = selectInput(inputId = "branch", label = "Grein:",
+                               choices = c("master"))
+    )
+  )
+
   installPackage <- observeEvent(input$install, {
     withCallingHandlers({
       shinyjs::html("sysMessage", "")
