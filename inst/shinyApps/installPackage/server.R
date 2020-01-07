@@ -8,6 +8,10 @@ library(rpivotTable)
 
 server <- function(input, output, session) {
 
+  # params
+  instance <- Sys.getenv("R_RAP_INSTANCE")
+  configPath <- Sys.getenv("R_RAP_CONFIG_PATH")
+
   installPackage <- observeEvent(input$install, {
     withCallingHandlers({
       shinyjs::html("sysMessage", "")
@@ -19,8 +23,6 @@ server <- function(input, output, session) {
     })
   })
 
-  # test environ vars
-  output$confPath <- renderPrint(paste("Config path:", Sys.getenv("R_RAP_CONFIG_PATH")))
 
   # Various calls for session data from rapbase and systemn settings
   output$callUser <- renderText({
@@ -56,11 +58,11 @@ server <- function(input, output, session) {
   })
 
   output$envInstance <- renderText({
-    Sys.getenv("R_RAP_INSTANCE")
+    instance
   })
 
   output$envConfigPath <- renderText({
-    Sys.getenv("R_RAP_CONFIG_PATH")
+    configPath
   })
 
   output$locale <- renderText({

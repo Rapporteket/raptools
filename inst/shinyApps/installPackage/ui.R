@@ -66,7 +66,6 @@ ui <- tagList(
           p(em("Function message:")),
           verbatimTextOutput("funMessage"),
           p(em("Test env var:")),
-          verbatimTextOutput("confPath"),
           appNavbarUserWidget(user = uiOutput("appUserName"),
                               organization = uiOutput("appOrgName"),
                               addUserInfo = TRUE),
