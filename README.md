@@ -1,3 +1,4 @@
+# raptools <img src='man/figures/logo.svg' align="right" height="139" />
 
 <!-- badges: start -->
 [![Travis build status](https://travis-ci.org/Rapporteket/raptools.svg?branch=rel)](https://travis-ci.org/Rapporteket/raptools)
