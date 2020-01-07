@@ -1,5 +1,5 @@
 library(rapbase)
-library(magrittr)
+library(rpivotTable)
 
 addResourcePath('rap', system.file('www', package='rapbase'))
 appTitle = "Swiss army knife"
@@ -72,6 +72,16 @@ ui <- tagList(
                               addUserInfo = TRUE),
           tags$head(tags$link(rel="shortcut icon", href="rap/favicon.ico"))
 
+        )
+      )
+    ),
+    shiny::tabPanel("Log",
+      shiny::mainPanel(
+        fluidRow(
+          shiny::uiOutput("logSelector")
+        ),
+        fluidRow(shiny::column(12,
+          rpivotTable::rpivotTableOutput("logPivottTable"))
         )
       )
     )

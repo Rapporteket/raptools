@@ -2,5 +2,6 @@
 
 export("%>%")
 export(calendarAutoReport)
+export(getLogData)
 export(static_help)
 importFrom(magrittr,"%>%")
