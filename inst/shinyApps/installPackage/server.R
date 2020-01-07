@@ -8,22 +8,19 @@ library(rpivotTable)
 
 server <- function(input, output, session) {
 
-  # params
+  # Params
   instance <- Sys.getenv("R_RAP_INSTANCE")
   configPath <- Sys.getenv("R_RAP_CONFIG_PATH")
 
-  installPackage <- observeEvent(input$install, {
-    withCallingHandlers({
-      shinyjs::html("sysMessage", "")
-      shinyjs::html("funMessage", "")
-      shinyjs::html("funMessage", rapbase::installGithubPackage(input$package, input$branch))
-    },
-    message = function(m) {
-      shinyjs::html(id = "sysMessage", html = m$message, add = TRUE)
-    })
-  })
+
+  # widget
+  output$appUserName <- renderText(getUserFullName(session))
+  output$appOrgName <- renderText(paste(getUserReshId(session),
+                                        getUserRole(session),
+                                        sep = ", "))
 
 
+  # Info
   # Various calls for session data from rapbase and systemn settings
   output$callUser <- renderText({
     paste("rapbase::getUserName(session):",
@@ -69,11 +66,19 @@ server <- function(input, output, session) {
     Sys.getlocale()
   })
 
-  # widget
-  output$appUserName <- renderText(getUserFullName(session))
-  output$appOrgName <- renderText(paste(getUserReshId(session),
-                                        getUserRole(session),
-                                        sep = ", "))
+
+  # Install packages
+  installPackage <- observeEvent(input$install, {
+    withCallingHandlers({
+      shinyjs::html("sysMessage", "")
+      shinyjs::html("funMessage", "")
+      shinyjs::html("funMessage", rapbase::installGithubPackage(input$package, input$branch))
+    },
+    message = function(m) {
+      shinyjs::html(id = "sysMessage", html = m$message, add = TRUE)
+    })
+  })
+
 
   #------------Logwatcher-----
   output$logSelector <- renderUI(
