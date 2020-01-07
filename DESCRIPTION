@@ -6,6 +6,7 @@ Authors@R: c(
            family = "Edvardsen",
            role = c("aut", "cre"),
            email = "biorakel@gmail.com",
+           comment = c(ORCID = "0000-0002-5210-3656"))
 Maintainer: Are Edvardsen <are.edvardsen@helse-nord.no>
 Description: Tools for working with Rapporteket. Mainly for developers.
 Depends:
