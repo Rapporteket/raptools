@@ -19,7 +19,7 @@
 #' calendarAutoReport(rdoy)
 
 calendarAutoReport <- function(runDayOfYear, pointRangeMax = 0) {
-  stopifnot(is.numeric(runDayOfYear))
+  stopifnot(is.numeric(unlist(runDayOfYear)))
   stopifnot(is.integer(pointRangeMax) | pointRangeMax == 0)
 
   # prepare data
