@@ -18,6 +18,7 @@ Imports:
     readr,
     remotes,
     sendmailR,
+    shinyalert,
     shinyjs,
     shinythemes,
     yaml,
