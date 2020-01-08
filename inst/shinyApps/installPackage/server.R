@@ -1,24 +1,36 @@
-# Define server logic for installing packages
-
-library(httr)
+#library(dplyr)
+#library(httr)
+library(lubridate)
+library(magrittr)
+library(rapbase)
+library(raptools)
+library(rpivotTable)
+library(shinyalert)
 library(shinyjs)
 
 server <- function(input, output, session) {
 
-  installPackage <- observeEvent(input$install, {
-    withCallingHandlers({
-      shinyjs::html("sysMessage", "")
-      shinyjs::html("funMessage", "")
-      shinyjs::html("funMessage", rapbase::installGithubPackage(input$package, input$branch))
-    },
-    message = function(m) {
-      shinyjs::html(id = "sysMessage", html = m$message, add = TRUE)
-    })
+  # Params
+  instance <- Sys.getenv("R_RAP_INSTANCE")
+  configPath <- Sys.getenv("R_RAP_CONFIG_PATH")
+
+
+  # widget
+  output$appUserName <- renderText(getUserFullName(session))
+  output$appOrgName <- renderText(paste(getUserReshId(session),
+                                        getUserRole(session),
+                                        sep = ", "))
+  # User info in widget
+  userInfo <- rapbase::howWeDealWithPersonalData(session)
+  observeEvent(input$userInfo, {
+    shinyalert("Dette vet Rapporteket om deg:", userInfo,
+               type = "", imageUrl = "rap/logo.svg",
+               closeOnEsc = TRUE, closeOnClickOutside = TRUE,
+               html = TRUE, confirmButtonText = rapbase::noOptOutOk())
   })
 
-  # test environ vars
-  output$confPath <- renderPrint(paste("Config path:", Sys.getenv("R_RAP_CONFIG_PATH")))
 
+  # Info
   # Various calls for session data from rapbase and systemn settings
   output$callUser <- renderText({
     paste("rapbase::getUserName(session):",
@@ -53,21 +65,96 @@ server <- function(input, output, session) {
   })
 
   output$envInstance <- renderText({
-    Sys.getenv("R_RAP_INSTANCE")
+    instance
   })
 
   output$envConfigPath <- renderText({
-    Sys.getenv("R_RAP_CONFIG_PATH")
+    configPath
   })
 
   output$locale <- renderText({
     Sys.getlocale()
   })
 
-  # widget
-  output$appUserName <- renderText(getUserFullName(session))
-  output$appOrgName <- renderText(paste(getUserReshId(session),
-                                        getUserRole(session),
-                                        sep = ", "))
 
+  # Install packages
+  if (instance == "PRODUCTION") {
+    checklist <- prodChecklist
+  }
+  if (instance == "QA") {
+    checklist <- qaChecklist
+  }
+
+  output$branchSelector <- renderUI(
+    switch (instance,
+      DEV = textInput(inputId = "branch", label = "Grein:"),
+      TEST = textInput(inputId = "branch", label = "Grein:"),
+      QA = selectInput(inputId = "branch", label = "Grein:",
+                       choices = c("master", "rel")),
+      PRODUCTION = selectInput(inputId = "branch", label = "Grein:",
+                               choices = c("master"))
+    )
+  )
+
+  output$checklist <- renderUI(
+    if (exists('checklist')) {
+      checkboxGroupInput(inputId = "manControl",
+                         label = "Sjekk at du faktisk har:",
+                         choices = checklist)
+    } else {
+      NULL
+    }
+  )
+
+  output$installButton <- renderUI(
+    if (exists('checklist')) {
+      if (length(input$manControl) == length(checklist)) {
+        actionButton(inputId = "install", label = "Install")
+      } else {
+        NULL
+      }
+    } else {
+      actionButton(inputId = "install", label = "Install")
+    }
+
+  )
+
+  installPackage <- observeEvent(input$install, {
+    withCallingHandlers({
+      shinyjs::html("sysMessage", "")
+      shinyjs::html("funMessage", "")
+      shinyjs::html("funMessage", rapbase::installGithubPackage(input$package, input$branch))
+    },
+    message = function(m) {
+      shinyjs::html(id = "sysMessage", html = m$message, add = TRUE)
+    })
+  })
+
+
+  #------------Logwatcher-----
+  output$logSelector <- renderUI(
+    shiny::selectInput(
+      inputId = "selectLog",
+      label = "Log:",
+      choices = list(
+        "Application level" = "app",
+        "Report level"="report")
+    )
+  )
+
+  logData <- reactive(
+    raptools::getLogData(req(input$selectLog)) %>%
+      dplyr::mutate(
+        time = as.POSIXct(time),
+        year = lubridate::year(time),
+        month = lubridate::month(time),
+        day = lubridate::day(time),
+        weekday = lubridate::wday(
+          time,
+          week_start = 1,
+          abbr =FALSE))
+  )
+  output$logPivottTable <- rpivotTable::renderRpivotTable(
+    rpivotTable::rpivotTable(logData())
+  )
 }

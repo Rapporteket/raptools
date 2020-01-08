@@ -19,6 +19,8 @@
 #' calendarAutoReport(rdoy)
 
 calendarAutoReport <- function(runDayOfYear, pointRangeMax = 0) {
+  stopifnot(is.numeric(unlist(runDayOfYear)))
+  stopifnot(is.integer(pointRangeMax) | pointRangeMax == 0)
 
   # prepare data
   df <- data.frame(dayOfYear=runDayOfYear)
@@ -68,10 +70,13 @@ calendarAutoReport <- function(runDayOfYear, pointRangeMax = 0) {
                                               fill=ymnId)) +
     ggplot2::geom_tile(colour="white",size=.1, alpha=0.3) +
     ggplot2::facet_wrap(~yearMonthName, scales = "fixed", nrow = 4) +
-    ggplot2::geom_point(data = b, ggplot2::aes(x=weekOfMonth, y=dayName, size = n),
-               colour="#FF7260") +
-    ggplot2::geom_text(data = b, ggplot2::aes(weekOfMonth , dayName, label=monthDayNum),
-              colour="white",size=2.5, nudge_x = .35, nudge_y = -.2) +
+    ggplot2::geom_point(data = b %>% dplyr::filter(!is.na(n)),
+                        ggplot2::aes(x=weekOfMonth, y=dayName, size = n),
+                        colour="#FF7260") +
+    ggplot2::geom_text(
+      data = b,
+      ggplot2::aes(weekOfMonth , dayName, label=monthDayNum),
+      colour="white",size=2.5, nudge_x = .35, nudge_y = -.2) +
     ggplot2::theme_minimal() +
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
           panel.grid.minor = ggplot2::element_blank(),
