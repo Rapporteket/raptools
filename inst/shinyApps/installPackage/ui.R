@@ -73,13 +73,40 @@ ui <- tagList(
         )
       )
     ),
-    shiny::tabPanel("Log",
-      shiny::mainPanel(
-        fluidRow(
-          shiny::uiOutput("logSelector")
-        ),
-        fluidRow(shiny::column(12,
+  shiny::tabPanel("Log",
+    shiny::mainPanel(
+      fluidRow(
+        shiny::uiOutput("logSelector")
+      ),
+      fluidRow(shiny::column(12,
           rpivotTable::rpivotTableOutput("logPivottTable"))
+      )
+    )
+  ),
+    shiny::tabPanel(
+      "Autoreport",
+      shiny::sidebarLayout(
+        shiny::sidebarPanel(
+          uiOutput("autoReportSidebar")
+          ),
+          shiny::mainPanel(
+            shiny::tabsetPanel(
+              id = "autoreport",
+            shiny::tabPanel(
+              "Oversikt", value = "oversikt",
+              plotOutput("calendar")
+            ),
+            shiny::tabPanel(
+              "Lag ny", value = "lagNy",
+              tags$h4("Yaml snippet for ny rapport"),
+              verbatimTextOutput("yamlNewReg")
+            ),
+            shiny::tabPanel(
+              "Slett", value = "slett",
+              tags$h4("Yaml for rapport som skal slettes:"),
+              verbatimTextOutput("delSummary")
+            )
+          )
         )
       )
     )
