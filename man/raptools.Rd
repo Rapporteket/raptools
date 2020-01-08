@@ -3,6 +3,7 @@
 \docType{package}
 \name{raptools}
 \alias{raptools}
+\alias{raptools-package}
 \title{raptools: A package containing development tools at Rapporteket.}
 \description{
 Provide functions and resources for development tasks at Rapporteket.
