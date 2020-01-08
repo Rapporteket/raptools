@@ -5,6 +5,7 @@ library(magrittr)
 library(rapbase)
 library(raptools)
 library(rpivotTable)
+library(shinyalert)
 library(shinyjs)
 
 server <- function(input, output, session) {
@@ -19,6 +20,14 @@ server <- function(input, output, session) {
   output$appOrgName <- renderText(paste(getUserReshId(session),
                                         getUserRole(session),
                                         sep = ", "))
+  # User info in widget
+  userInfo <- rapbase::howWeDealWithPersonalData(session)
+  observeEvent(input$userInfo, {
+    shinyalert("Dette vet Rapporteket om deg:", userInfo,
+               type = "", imageUrl = "rap/logo.svg",
+               closeOnEsc = TRUE, closeOnClickOutside = TRUE,
+               html = TRUE, confirmButtonText = rapbase::noOptOutOk())
+  })
 
 
   # Info

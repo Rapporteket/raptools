@@ -1,6 +1,7 @@
 library(magrittr)
 library(rapbase)
 library(rpivotTable)
+library(shinyalert)
 library(shinyjs)
 
 addResourcePath('rap', system.file('www', package='rapbase'))
@@ -16,6 +17,7 @@ ui <- tagList(
     theme = "rap/bootstrap.css",
 
     tabPanel("Informasjon",
+             useShinyalert(),
              mainPanel(
                # info text
                system.file("info.Rmd", package = "raptools") %>%
