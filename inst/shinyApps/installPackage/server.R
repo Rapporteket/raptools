@@ -1,12 +1,11 @@
-# Define server logic for installing packages
-
-library(httr)
-library(shinyjs)
+#library(dplyr)
+#library(httr)
 library(lubridate)
-library(dplyr)
-library(rpivotTable)
-library(rapbase)
 library(magrittr)
+library(rapbase)
+library(raptools)
+library(rpivotTable)
+library(shinyjs)
 
 server <- function(input, output, session) {
 

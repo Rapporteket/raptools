@@ -1,6 +1,7 @@
+library(magrittr)
 library(rapbase)
 library(rpivotTable)
-library(magrittr)
+library(shinyjs)
 
 addResourcePath('rap', system.file('www', package='rapbase'))
 appTitle = "Swiss army knife"
