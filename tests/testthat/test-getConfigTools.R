@@ -20,7 +20,7 @@ test_that("the function produces the correct errors", {
   expect_error(
     raptools::getConfigTools("rapbaseConfig"),
     "cant find the Config file"
-  )docu
+  )
 })
 
 Sys.setenv(R_RAP_CONFIG_PATH=currentConfigPath)
