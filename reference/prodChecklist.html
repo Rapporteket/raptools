@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make static html of R doc in package — static_help • raptools</title>
+<title>Checklist when deploying application — prodChecklist • raptools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -42,8 +42,9 @@
 
 
 
-<meta property="og:title" content="Make static html of R doc in package — static_help" />
-<meta property="og:description" content="Make static html of R doc in package" />
+<meta property="og:title" content="Checklist when deploying application — prodChecklist" />
+<meta property="og:description" content="A dataset containing checklist entries used prior to deploying a registry
+app at Rapporteket" />
 <meta property="og:image" content="/logo.png" />
 <meta name="twitter:card" content="summary" />
 
@@ -113,45 +114,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make static html of R doc in package</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Rapporteket/raptools/blob/master/R/make_static_help.R'><code>R/make_static_help.R</code></a></small>
-    <div class="hidden name"><code>static_help.Rd</code></div>
+    <h1>Checklist when deploying application</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Rapporteket/raptools/blob/master/R/data.R'><code>R/data.R</code></a></small>
+    <div class="hidden name"><code>prodChecklist.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Make static html of R doc in package</p>
+    <p>A dataset containing checklist entries used prior to deploying a registry
+app at Rapporteket</p>
     </div>
 
-    <pre class="usage"><span class='fu'>static_help</span>(<span class='no'>pkg</span>, <span class='kw'>links</span> <span class='kw'>=</span> <span class='kw pkg'>tools</span><span class='kw ns'>::</span><span class='fu'><a href='https://rdrr.io/r/tools/HTMLlinks.html'>findHTMLlinks</a></span>())</pre>
+    <pre class="usage"><span class='no'>prodChecklist</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>pkg</th>
-      <td><p>string providing name of (installed) package containing target
-docs</p></td>
-    </tr>
-    <tr>
-      <th>links</th>
-      <td><p>set NULL to avoid (local) intra-doc linking. Defaults to
-tools::findHTMLlinks()</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
 
-    <p>(a set of) html file(s) in system.file('html', package = pkg)</p>
+    <p>A named list of oks</p><dl class='dl-horizontal'>
+  <dt>name</dt><dd><p>the text of each check in a PRODUCTION environment</p></dd>
+  <dt>values</dt><dd><p>dummy ok, not used</p></dd>
+  ...
 
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'>static_help</span>(<span class='st'>"raptools"</span>, <span class='kw'>links</span> <span class='kw'>=</span> <span class='kw'>NULL</span>)</div><div class='output co'>#&gt; <span class='message'>Generated help files will be placed in /home/travis/R/Library/raptools/html</span></div><div class='input'><span class='fu'>static_help</span>(<span class='st'>"raptools"</span>)</div><div class='output co'>#&gt; <span class='message'>Generated help files will be placed in /home/travis/R/Library/raptools/html</span></div></pre>
+</dl>
+
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
     <ul class="nav nav-pills nav-stacked">
-      <li><a href="#arguments">Arguments</a></li>
-      <li><a href="#value">Value</a></li>
-      <li><a href="#examples">Examples</a></li>
+      <li><a href="#format">Format</a></li>
     </ul>
 
   </div>
