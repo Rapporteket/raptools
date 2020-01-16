@@ -473,6 +473,10 @@ server <- function(input, output, session) {
   output$delSummary <- renderText({
     as.yaml(r$rd[input$delRep])
   })
+  #----------rapbaseConfig------
+  output$rapbaseConfig <- shiny::renderText({
+    raptools::getConfigTools(fileName = "rapbaseConfig")
+  })
 
 
 

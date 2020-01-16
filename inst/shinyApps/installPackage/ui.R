@@ -73,16 +73,17 @@ ui <- tagList(
         )
       )
     ),
-  shiny::tabPanel("Log",
-    shiny::mainPanel(
-      fluidRow(
-        shiny::uiOutput("logSelector")
-      ),
-      fluidRow(shiny::column(12,
-          rpivotTable::rpivotTableOutput("logPivottTable"))
+    shiny::tabPanel("Log",
+      shiny::mainPanel(
+        fluidRow(
+          shiny::uiOutput("logSelector")
+        ),
+        fluidRow(shiny::column(12,
+            rpivotTable::rpivotTableOutput("logPivottTable"))
+        )
       )
-    )
-  ),
+    ),
+    #--------Autoreport----------
     shiny::tabPanel(
       "Autoreport",
       shiny::sidebarLayout(
@@ -107,6 +108,15 @@ ui <- tagList(
               verbatimTextOutput("delSummary")
             )
           )
+        )
+      )
+    ),
+    #---------Config------
+    shiny::tabPanel("Config",
+      shiny::tabsetPanel(
+        shiny::tabPanel("rapbaseConfig",
+          shiny::tags$h4("rapbaseConfig"),
+          shiny::verbatimTextOutput("rapbaseConfig")
         )
       )
     )
