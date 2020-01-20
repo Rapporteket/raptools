@@ -19,16 +19,9 @@
 #' calendarAutoReport(rdoy)
 
 calendarAutoReport <- function(runDayOfYear, pointRangeMax = 0) {
-  stopifnot(is.numeric(unlist(runDayOfYear)))
+  stopifnot(is.numeric(unlist(runDayOfYear)) | is.null(runDayOfYear))
   stopifnot(is.integer(pointRangeMax) | pointRangeMax == 0)
 
-  # prepare data
-  df <- data.frame(dayOfYear=runDayOfYear)
-
-  # count reports for each day
-  autoReportCount <- dplyr::count(df, dayOfYear)
-
-  # make blank data, a year from beginning of current month
   startDate <- Sys.Date() - as.numeric(strftime(Sys.Date(), format = "%d")) + 1
   b <- data.frame(datetime=seq(startDate, by = "day", length.out = 365))
   b$year <- as.POSIXlt(b$datetime)$year + 1900
@@ -52,7 +45,7 @@ calendarAutoReport <- function(runDayOfYear, pointRangeMax = 0) {
     b$yearMonthName,
     levels = strftime(seq(present, by = "month", length.out = 12),
                       format = "%B %Y")
-    )
+  )
 
   # make levels to get in right day name order
   aMonday <- as.Date("2018-09-03")
@@ -63,29 +56,39 @@ calendarAutoReport <- function(runDayOfYear, pointRangeMax = 0) {
 
   # add autoReports dayly count
   # not needed ? b$autoReportCount <- rep(0, dim(b)[1])
-  b <- b %>% dplyr::left_join(autoReportCount, by = "dayOfYear")
+
 
   # plot object
   g <- ggplot2::ggplot(data = b, ggplot2::aes(x=weekOfMonth, y=dayName,
                                               fill=ymnId)) +
     ggplot2::geom_tile(colour="white",size=.1, alpha=0.3) +
     ggplot2::facet_wrap(~yearMonthName, scales = "fixed", nrow = 4) +
-    ggplot2::geom_point(data = b %>% dplyr::filter(!is.na(n)),
-                        ggplot2::aes(x=weekOfMonth, y=dayName, size = n),
-                        colour="#FF7260") +
     ggplot2::geom_text(
       data = b,
       ggplot2::aes(weekOfMonth , dayName, label=monthDayNum),
       colour="white",size=2.5, nudge_x = .35, nudge_y = -.2) +
     ggplot2::theme_minimal() +
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
-          panel.grid.minor = ggplot2::element_blank(),
-          axis.text.x = ggplot2::element_blank()) +
+                   panel.grid.minor = ggplot2::element_blank(),
+                   axis.text.x = ggplot2::element_blank()) +
     ggplot2::guides(fill=FALSE) +
     ggplot2::labs(x = "", y = "")
+
+  if (!is.null(runDayOfYear)) {
+  # prepare data
+  df <- data.frame(dayOfYear=runDayOfYear)
+
+  # count reports for each day
+  autoReportCount <- dplyr::count(df, dayOfYear)
+  b <- b %>% dplyr::left_join(autoReportCount, by = "dayOfYear")
+  g <- g + ggplot2::geom_point(data = b %>% dplyr::filter(!is.na(n)),
+                               ggplot2::aes(x=weekOfMonth, y=dayName, size = n),
+                               colour="#FF7260")
+  }
 
   if (pointRangeMax > 0) {
     g <- g + ggplot2::scale_size_continuous(limits = c(1, pointRangeMax))
   }
+
   return(g)
 }

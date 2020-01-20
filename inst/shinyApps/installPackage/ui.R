@@ -56,7 +56,7 @@ ui <- tagList(
         sidebarPanel(
           selectInput(inputId = "package",
                       label = "Package:",
-                      choices = c("intensiv", "muskel", "Nakke", "nger",
+                      choices = c("intensiv", "muskel", "nakke", "nger",
                                   "nordicscir", "norgast", "NORIC", "nordummy",
                                   "rapbase", "rapgen", "raplog",
                                   "hisreg", "norspis", "nra", "smerte",
@@ -79,7 +79,44 @@ ui <- tagList(
           shiny::uiOutput("logSelector")
         ),
         fluidRow(shiny::column(12,
-          rpivotTable::rpivotTableOutput("logPivottTable"))
+            rpivotTable::rpivotTableOutput("logPivottTable"))
+        )
+      )
+    ),
+    #--------Autoreport----------
+    shiny::tabPanel(
+      "Autoreport",
+      shiny::sidebarLayout(
+        shiny::sidebarPanel(
+          uiOutput("autoReportSidebar")
+          ),
+          shiny::mainPanel(
+            shiny::tabsetPanel(
+              id = "autoreport",
+            shiny::tabPanel(
+              "Oversikt", value = "oversikt",
+              plotOutput("calendar")
+            ),
+            shiny::tabPanel(
+              "Lag ny", value = "lagNy",
+              tags$h4("Yaml snippet for ny rapport"),
+              verbatimTextOutput("yamlNewReg")
+            ),
+            shiny::tabPanel(
+              "Slett", value = "slett",
+              tags$h4("Yaml for rapport som skal slettes:"),
+              verbatimTextOutput("delSummary")
+            )
+          )
+        )
+      )
+    ),
+    #---------Config------
+    shiny::tabPanel("Config",
+      shiny::tabsetPanel(
+        shiny::tabPanel("rapbaseConfig",
+          shiny::tags$h4("rapbaseConfig"),
+          shiny::verbatimTextOutput("rapbaseConfig")
         )
       )
     )
