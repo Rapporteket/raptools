@@ -56,11 +56,11 @@ ui <- tagList(
         sidebarPanel(
           selectInput(inputId = "package",
                       label = "Package:",
-                      choices = c("intensiv", "muskel", "nakke", "nger",
+                      choices = sort(c("intensiv", "muskel", "nakke", "nger",
                                   "nordicscir", "norgast", "NORIC", "nordummy",
                                   "rapbase", "rapgen", "raplog",
                                   "hisreg", "norspis", "nra", "smerte",
-                                  "rygg")),
+                                  "rygg", "intensivberedskap"))),
           uiOutput("branchSelector"),
           uiOutput("installButton")
         ),
