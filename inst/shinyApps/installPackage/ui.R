@@ -60,7 +60,7 @@ ui <- tagList(
                                   "nordicscir", "norgast", "NORIC", "nordummy",
                                   "rapbase", "rapgen", "raplog",
                                   "hisreg", "norspis", "nra", "smerte",
-                                  "rygg", "intensivberedskap"))),
+                                  "rygg", "intensivberedskap", "korona"))),
           uiOutput("branchSelector"),
           uiOutput("installButton")
         ),
