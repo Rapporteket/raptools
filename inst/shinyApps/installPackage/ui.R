@@ -59,7 +59,7 @@ ui <- tagList(
                       choices = sort(c("intensiv", "muskel", "nakke", "nger",
                                   "nordicscir", "norgast", "NORIC", "nordummy",
                                   "rapbase", "rapgen", "raplog",
-                                  "hisreg", "norspis", "nra", "smerte",
+                                  "hisreg", "norspis2", "nra", "smerte",
                                   "rygg", "intensivberedskap", "korona"))),
           uiOutput("branchSelector"),
           uiOutput("installButton")
