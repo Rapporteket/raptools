@@ -19,10 +19,15 @@ Sys.setlocale("LC_TIME", "nb_NO.UTF-8")
 
 server <- function(input, output, session) {
 
-  # Params
+  # session persistent data
   instance <- Sys.getenv("R_RAP_INSTANCE")
   configPath <- Sys.getenv("R_RAP_CONFIG_PATH")
-
+  url <- "https://api.github.com/orgs/rapporteket/"
+  repo <- curl::curl_fetch_memory(paste0(url, "repos"))
+  repo <- jsonlite::fromJSON(rawToChar(repo$content))
+  repo <- repo %>%
+    dplyr::select(name, default_branch, updated_at) %>%
+    dplyr::arrange(desc(updated_at))
 
   # widget
   output$appUserName <- renderText(getUserFullName(session))
@@ -95,14 +100,27 @@ server <- function(input, output, session) {
     checklist <- qaChecklist
   }
 
+  repoRelease <- shiny::reactive({
+    shiny::req(input$repo)
+    rel <- curl::curl_fetch_memory(
+      paste0("https://api.github.com/repos/rapporteket/",
+             input$repo, "/releases")
+    )
+    rel <- jsonlite::fromJSON(rawToChar(rel$content))
+    rel$tag_name
+  })
+
+  output$repoSelector <- shiny::renderUI(
+    shiny::selectInput(inputId = "repo", label = "Pakke:", choices = repo$name)
+  )
+
   output$branchSelector <- renderUI(
-    switch (instance,
-      DEV = textInput(inputId = "branch", label = "Grein:"),
-      TEST = textInput(inputId = "branch", label = "Grein:"),
-      QA = selectInput(inputId = "branch", label = "Grein:",
-                       choices = c("master", "rel")),
-      PRODUCTION = selectInput(inputId = "branch", label = "Grein:",
-                               choices = c("master"))
+    switch(instance,
+      DEV = shiny::textInput(inputId = "branch", label = "Grein:"),
+      TEST = shiny::textInput(inputId = "branch", label = "Grein:"),
+      QA = NULL,
+      PRODUCTION = shiny::selectInput(inputId = "branch", label = "Versjon:",
+                                      choices = repoRelease())
     )
   )
 
@@ -118,7 +136,8 @@ server <- function(input, output, session) {
 
   output$installButton <- renderUI(
     if (exists('checklist')) {
-      if (length(input$manControl) == length(checklist)) {
+      if (length(input$manControl) == length(checklist) &&
+          input$branch != "") {
         actionButton(inputId = "install", label = "Install")
       } else {
         NULL
@@ -130,10 +149,15 @@ server <- function(input, output, session) {
   )
 
   installPackage <- observeEvent(input$install, {
+    branch <- input$branch
+    if (instance == "QA") {
+      branch <- repo$default_branch[repo$name == input$repo]
+    }
     withCallingHandlers({
       shinyjs::html("sysMessage", "")
       shinyjs::html("funMessage", "")
-      shinyjs::html("funMessage", rapbase::installGithubPackage(input$package, input$branch))
+      shinyjs::html("funMessage",
+                    rapbase::installGithubPackage(input$repo, branch))
     },
     message = function(m) {
       shinyjs::html(id = "sysMessage", html = m$message, add = TRUE)

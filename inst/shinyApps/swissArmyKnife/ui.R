@@ -54,13 +54,7 @@ ui <- tagList(
       sidebarLayout(
       # Sidebar panel for inputs ----
         sidebarPanel(
-          selectInput(inputId = "package",
-                      label = "Package:",
-                      choices = sort(c("intensiv", "muskel", "nakke", "nger",
-                                  "nordicscir", "norgast", "NORIC", "nordummy",
-                                  "rapbase", "rapgen", "raplog",
-                                  "hisreg", "norspis2", "nra", "smerte",
-                                  "rygg", "intensivberedskap", "korona"))),
+          shiny::uiOutput("repoSelector"),
           uiOutput("branchSelector"),
           uiOutput("installButton")
         ),

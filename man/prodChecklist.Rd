@@ -4,12 +4,14 @@
 \name{prodChecklist}
 \alias{prodChecklist}
 \title{Checklist when deploying application}
-\format{A named list of oks
+\format{
+A named list of oks
 \describe{
   \item{name}{the text of each check in a PRODUCTION environment}
   \item{values}{dummy ok, not used}
   ...
-}}
+}
+}
 \usage{
 prodChecklist
 }

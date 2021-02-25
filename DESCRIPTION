@@ -11,8 +11,10 @@ Description: Tools for working with Rapporteket. Mainly for developers.
 Depends:
   R (>= 3.5.0)
 Imports:
+    curl,
     dplyr,
     digest,
+    jsonlite,
     magrittr,
     rapbase,
     readr,
@@ -35,4 +37,4 @@ BugReports: http://github.com/Rapporteket/raptools/issues
 Suggests: 
     testthat (>= 2.1.0),
     covr
-RoxygenNote: 7.0.1
+RoxygenNote: 7.1.1
