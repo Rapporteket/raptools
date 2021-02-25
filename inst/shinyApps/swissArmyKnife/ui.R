@@ -16,7 +16,7 @@ ui <- tagList(
     windowTitle = appTitle,
     theme = "rap/bootstrap.css",
 
-    tabPanel("Informasjon",
+    tabPanel("Start",
              useShinyalert(),
              mainPanel(
                # info text
@@ -49,7 +49,7 @@ ui <- tagList(
                tags$head(tags$link(rel="shortcut icon", href="rap/favicon.ico"))
              )
     ),
-    tabPanel("Install package from GitHub",
+    tabPanel("Installasjon",
       # Sidebar layout with a input and output definitions ----
       sidebarLayout(
       # Sidebar panel for inputs ----
@@ -73,7 +73,7 @@ ui <- tagList(
         )
       )
     ),
-    shiny::tabPanel("Log",
+    shiny::tabPanel("Bruksstatistikk",
       shiny::mainPanel(
         fluidRow(
           shiny::uiOutput("logSelector")
@@ -85,7 +85,7 @@ ui <- tagList(
     ),
     #--------Autoreport----------
     shiny::tabPanel(
-      "Autoreport",
+      "Autoutsending",
       shiny::sidebarLayout(
         shiny::sidebarPanel(
           uiOutput("autoReportSidebar")
@@ -112,10 +112,19 @@ ui <- tagList(
       )
     ),
     #---------Config------
-    shiny::tabPanel("Config",
+    shiny::tabPanel("Informasjon",
       shiny::tabsetPanel(
+        shiny::tabPanel("Shiny Server app log",
+          shiny::sidebarLayout(
+            shiny::sidebarPanel(
+              shiny::selectInput("testinput", "Test", c("A", "B", "C"))
+            ),
+            shiny::mainPanel(
+              shiny::p("kommer snart")
+            )
+          )
+        ),
         shiny::tabPanel("rapbaseConfig",
-          shiny::tags$h4("rapbaseConfig"),
           shiny::verbatimTextOutput("rapbaseConfig")
         )
       )
