@@ -3,3 +3,6 @@
 .RData
 *.html
 docs/
+inst/shinyApps/swissArmyKnife/*.md
+inst/shinyApps/installPackage/*.md
+inst/shinyApps/rapLayoutTemplate/*.md
