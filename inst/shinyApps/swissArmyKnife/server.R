@@ -30,7 +30,8 @@ server <- function(input, output, session) {
                                         getUserRole(session),
                                         sep = ", "))
   # User info in widget
-  userInfo <- rapbase::howWeDealWithPersonalData(session)
+  userInfo <- rapbase::howWeDealWithPersonalData(session,
+                                                 callerPkg = "raptools")
   observeEvent(input$userInfo, {
     shinyalert("Dette vet Rapporteket om deg:", userInfo,
                type = "", imageUrl = "rap/logo.svg",
