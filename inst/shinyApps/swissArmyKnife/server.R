@@ -100,6 +100,16 @@ server <- function(input, output, session) {
     checklist <- qaChecklist
   }
 
+  repoBranch <- shiny::reactive({
+    shiny::req(input$repo)
+    branch <- curl::curl_fetch_memory(
+      paste0("https://api.github.com/repos/rapporteket/",
+      input$repo, "/branches")
+    )
+    branch <- jsonlite::fromJSON(rawToChar(branch$content))
+    branch$name
+  })
+
   repoRelease <- shiny::reactive({
     shiny::req(input$repo)
     rel <- curl::curl_fetch_memory(
@@ -116,9 +126,13 @@ server <- function(input, output, session) {
 
   output$branchSelector <- renderUI(
     switch(instance,
-      DEV = shiny::textInput(inputId = "branch", label = "Grein:"),
-      TEST = shiny::textInput(inputId = "branch", label = "Grein:"),
-      QA = NULL,
+      DEV = shiny::selectInput(inputId = "branch", label = "Grein:",
+                               choices = repoBranch()),
+      TEST = shiny::selectInput(inputId = "branch", label = "Grein:",
+                                choices = repoBranch()),
+      QA = shiny::selectInput(
+        inputId = "branch", label = "Grein",
+        choices = repo$default_branch[repo$name == input$repo]),
       PRODUCTION = shiny::selectInput(inputId = "branch", label = "Versjon:",
                                       choices = repoRelease())
     )
