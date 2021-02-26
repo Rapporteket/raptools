@@ -114,7 +114,7 @@ ui <- tagList(
               shiny::uiOutput("shinyServerAppLogControls")
             ),
             shiny::mainPanel(
-              shiny::verbatimTextOutput("shinyServerLog")
+              shiny::uiOutput("shinyServerLog")
             )
           )
         ),

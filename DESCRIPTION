@@ -14,19 +14,20 @@ Imports:
     curl,
     dplyr,
     digest,
+    ggplot2,
     jsonlite,
+    lubridate,
     magrittr,
     rapbase,
     readr,
     remotes,
+    rpivotTable,
     sendmailR,
     shinyalert,
     shinyjs,
     shinythemes,
-    yaml,
-    ggplot2,
-    lubridate,
-    rpivotTable
+    stringi,
+    yaml
 Remotes:
     Rapporteket/rapbase
 License: GPL-2

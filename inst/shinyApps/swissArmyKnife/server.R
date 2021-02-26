@@ -530,8 +530,11 @@ server <- function(input, output, session) {
                        choices = as.list(shinyLogFile))
   })
 
-  output$shinyServerLog <- shiny::renderPrint({
-    readLines(input$shinyServerAppLog)
+  output$shinyServerLog <- shiny::renderUI({
+    shiny::req(input$shinyServerAppLog)
+    rawText <- readLines(input$shinyServerAppLog)
+    splitText <- stringi::stri_split(rawText, regex = "\\n")
+    lapply(splitText, shiny::p)
   })
 
   output$rapbaseConfig <- shiny::renderText({
