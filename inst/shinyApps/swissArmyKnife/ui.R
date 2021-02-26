@@ -111,10 +111,10 @@ ui <- tagList(
         shiny::tabPanel("Shiny Server app log",
           shiny::sidebarLayout(
             shiny::sidebarPanel(
-              shiny::selectInput("testinput", "Test", c("A", "B", "C"))
+              shiny::uiOutput("shinyServerAppLogControls")
             ),
             shiny::mainPanel(
-              shiny::p("kommer snart")
+              shiny::verbatimTextOutput("shinyServerLog")
             )
           )
         ),

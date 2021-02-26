@@ -20,14 +20,24 @@ Sys.setlocale("LC_TIME", "nb_NO.UTF-8")
 server <- function(input, output, session) {
 
   # session persistent data
+  ## from env
   instance <- Sys.getenv("R_RAP_INSTANCE")
   configPath <- Sys.getenv("R_RAP_CONFIG_PATH")
+  ## from github api
   url <- "https://api.github.com/orgs/rapporteket/"
   repo <- curl::curl_fetch_memory(paste0(url, "repos"))
   repo <- jsonlite::fromJSON(rawToChar(repo$content))
   repo <- repo %>%
     dplyr::select(name, default_branch, updated_at) %>%
     dplyr::arrange(desc(updated_at))
+  ## from file
+  f <- file.info(
+    list.files("/var/log/shiny-server", full.names = TRUE)
+  )
+  f <- f %>%
+    dplyr::arrange(desc(mtime))
+  shinyLogFile <- rownames(f)
+  names(shinyLogFile) <- basename(rownames(f))
 
   # widget
   output$appUserName <- renderText(getUserFullName(session))
@@ -512,7 +522,18 @@ server <- function(input, output, session) {
   output$delSummary <- renderText({
     as.yaml(r$rd[input$delRep])
   })
-  #----------rapbaseConfig------
+
+
+  #----------Server information------
+  output$shinyServerAppLogControls <- shiny::renderUI({
+    shiny::selectInput(inputId = "shinyServerAppLog", label = "Velg loggfil:",
+                       choices = as.list(shinyLogFile))
+  })
+
+  output$shinyServerLog <- shiny::renderPrint({
+    readLines(input$shinyServerAppLog)
+  })
+
   output$rapbaseConfig <- shiny::renderText({
     raptools::getConfigTools(fileName = "rapbaseConfig")
   })
