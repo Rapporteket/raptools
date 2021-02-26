@@ -55,6 +55,18 @@ server <- function(input, output, session) {
   })
 
 
+  # Gjenbrukbar funksjon for å bearbeide Rmd til html
+  htmlRenderRmd <- function(srcFile, params = list()) {
+    system.file(srcFile, package = "raptools") %>%
+      knitr::knit() %>%
+      markdown::markdownToHTML(.,
+                               options = c("fragment_only",
+                                           "base64_images",
+                                           "highlight_code")) %>%
+      shiny::HTML()
+  }
+
+
   # Info
   # Various calls for session data from rapbase and systemn settings
   output$callUser <- renderText({
@@ -105,9 +117,11 @@ server <- function(input, output, session) {
   # Install packages
   if (instance == "PRODUCTION") {
     checklist <- prodChecklist
+    doc <- "prod_install.Rmd"
   }
   if (instance == "QA") {
     checklist <- qaChecklist
+    doc <- "qa_install.Rmd"
   }
 
   repoBranch <- shiny::reactive({
@@ -147,6 +161,14 @@ server <- function(input, output, session) {
                                       choices = repoRelease())
     )
   )
+
+  output$doc <- shiny::renderUI({
+    if (instance %in% c("QA", "PRODUCTION")) {
+      htmlRenderRmd(doc)
+    } else {
+      NULL
+    }
+  })
 
   output$checklist <- renderUI(
     if (exists('checklist')) {

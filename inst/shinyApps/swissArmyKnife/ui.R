@@ -59,6 +59,7 @@ ui <- tagList(
           uiOutput("installButton")
         ),
         mainPanel(
+          uiOutput("doc"),
           uiOutput("checklist"),
           p(em("System message:")),
           verbatimTextOutput("sysMessage"),

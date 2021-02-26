@@ -1,0 +1,2 @@
+## Installasjon i PROD
+All installasjon i PROD skjer fra offisiell release på [github](https://github.com/Rapportekt). Om versjonene som angis til venstre ikke er riktige så må dette endres i tilsvarende prosjekt på [github](https://github.com/Rapportekt).

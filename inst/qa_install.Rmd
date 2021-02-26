@@ -1,0 +1,2 @@
+## Installasjon i QA
+All installasjon i QA skjer fra standard grein på [github](https://github.com/Rapportekt). Om greina som angis til venstre ikke er riktig så må dette endres i tilsvarende prosjekt på [github](https://github.com/Rapportekt).
