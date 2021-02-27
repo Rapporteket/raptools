@@ -29,6 +29,7 @@ server <- function(input, output, session) {
   repo <- jsonlite::fromJSON(rawToChar(repo$content))
   repo <- repo %>%
     dplyr::select(name, default_branch, updated_at) %>%
+    dplyr::filter(name != "raptools") %>%
     dplyr::arrange(desc(updated_at))
   ## from file
   f <- file.info(
@@ -131,7 +132,7 @@ server <- function(input, output, session) {
       input$repo, "/branches")
     )
     branch <- jsonlite::fromJSON(rawToChar(branch$content))
-    branch$name
+    dplyr::filter(branch, name != "gh-pages")$name
   })
 
   repoRelease <- shiny::reactive({
