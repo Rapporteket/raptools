@@ -25,7 +25,7 @@ server <- function(input, output, session) {
   configPath <- Sys.getenv("R_RAP_CONFIG_PATH")
   ## from github api
   url <- "https://api.github.com/orgs/rapporteket/"
-  repo <- curl::curl_fetch_memory(paste0(url, "repos"))
+  repo <- curl::curl_fetch_memory(paste0(url, "repos?per_page=100"))
   repo <- jsonlite::fromJSON(rawToChar(repo$content))
   repo <- repo %>%
     dplyr::select(name, default_branch, updated_at) %>%
