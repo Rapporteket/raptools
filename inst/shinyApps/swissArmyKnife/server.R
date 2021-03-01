@@ -157,14 +157,14 @@ server <- function(input, output, session) {
                                 choices = repoBranch()),
       QA = shiny::selectInput(
         inputId = "branch", label = "Grein",
-        choices = repo$default_branch[repo$name == input$repo]),
+        choices = repoBranch()),
       PRODUCTION = shiny::selectInput(inputId = "branch", label = "Versjon:",
                                       choices = repoRelease())
     )
   )
 
   output$doc <- shiny::renderUI({
-    shiny::req(input$repo, input$branch)
+    shiny::req(input$repo)
     if (instance %in% c("QA", "PRODUCTION")) {
       htmlRenderRmd(doc, params = list(repo = input$repo,
                                        branch = input$branch))
