@@ -1,2 +1,17 @@
-## Installasjon i QA
-All installasjon i QA skjer fra standard grein på [github](https://github.com/Rapportekt). Om greina som angis til venstre ikke er riktig så må dette endres i tilsvarende prosjekt på [github](https://github.com/Rapportekt).
+---
+params:
+  repo: "rapporteket"
+  branch: "main"
+---
+
+```{r setVars, include=FALSE}
+repoUrl <- paste0("(https://github.com/Rapportekt/", params$repo, ")")
+setBranchUrl <- paste0(
+  "(https://github.com/Rapporteket/", params$repo, "/settings/branches)"
+)
+mainBranch <- params$branch
+heading <- paste("## Installasjon av", params$repo, "i QA")
+```
+
+`r heading` 
+Installasjon av R-pakken __`r params$repo`__ i QA bør skje fra standardgreina _`r mainBranch`_ på [GitHub]`r repoUrl`. Inntil videre er det også mulig å installere fra andre greiner, men det er strengt tatt ikke ønskelig i QA. Standard grein for __`r params$repo`__ kan endres [her]`r setBranchUrl`. For å redusere sannsynligheten for å havne i "uløkka" er det lagt ved en sjekkliste som må fylles ut før installasjon kan skje. Bruk den samvittighetsfult.

@@ -164,8 +164,10 @@ server <- function(input, output, session) {
   )
 
   output$doc <- shiny::renderUI({
+    shiny::req(input$repo, input$branch)
     if (instance %in% c("QA", "PRODUCTION")) {
-      htmlRenderRmd(doc)
+      htmlRenderRmd(doc, params = list(repo = input$repo,
+                                       branch = input$branch))
     } else {
       NULL
     }

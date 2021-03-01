@@ -1,2 +1,15 @@
-## Installasjon i PROD
-All installasjon i PROD skjer fra offisiell release på [github](https://github.com/Rapportekt). Om versjonene som angis til venstre ikke er riktige så må dette endres i tilsvarende prosjekt på [github](https://github.com/Rapportekt).
+---
+params:
+  repo: "rapporteket"
+  branch: "main"
+---
+
+```{r setVars, include=FALSE}
+repoUrl <- paste0("(https://github.com/Rapportekt/", params$repo, ")")
+releaseUrl <- paste0(
+  "(https://github.com/Rapporteket/", params$repo, "/releases)")
+heading <- paste("## Installasjon av", params$repo, "i PROD")
+```
+
+`r heading`
+All installasjon av R-pakken __`r params$repo`__ i PROD skjer fra offisiell release på GitHub. Om versjonene som angis til venstre ikke er som forventet så må dette fikses `r paste0("[i __", params$repo, "__ på GitHub]", releaseUrl)`. Ved nedgradering til en tidligere versjon av R-pakken vær spesielt oppmerksom på feil som kan skyldes avhengigheter til andre pakker som har endret seg i mellomtiden. Om mulig bør en slik nedgradering testes. For å redusere sannsynligheten for å havne i "uløkka" er det lagt ved en sjekkliste som må fylles ut før installasjon kan skje. Bruk den samvittighetsfult.
