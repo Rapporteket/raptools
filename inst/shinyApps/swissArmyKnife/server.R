@@ -145,6 +145,11 @@ server <- function(input, output, session) {
     rel$tag_name
   })
 
+  checklistSelected <- shiny::reactive({
+    shiny::req(input$repo)
+    NULL
+  })
+
   output$repoSelector <- shiny::renderUI(
     shiny::selectInput(inputId = "repo", label = "Pakke:", choices = repo$name)
   )
@@ -177,7 +182,8 @@ server <- function(input, output, session) {
     if (exists('checklist')) {
       checkboxGroupInput(inputId = "manControl",
                          label = "Sjekk at du faktisk har:",
-                         choices = checklist)
+                         choices = checklist,
+                         selected = checklistSelected())
     } else {
       NULL
     }
