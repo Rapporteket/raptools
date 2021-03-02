@@ -43,7 +43,8 @@ server <- function(input, output, session) {
     list.files("/var/log/shiny-server", full.names = TRUE)
   )
   f <- f %>%
-    dplyr::arrange(desc(mtime))
+    dplyr::arrange(desc(mtime)) %>%
+    dplyr::slice_head(n = 20)
   shinyLogFile <- rownames(f)
   names(shinyLogFile) <- basename(rownames(f))
 
