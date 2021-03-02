@@ -1,1 +1,32 @@
 destination: docs
+
+development:
+  mode: auto
+
+template:
+  params:
+    bootswatch: flatly
+
+reference:
+  - title: Functions
+    desc: >
+      Regular functions in this package
+    contents:
+    - calendarAutoReport
+    - getConfigTools
+    - getLogData
+    - githubApi
+    - static_help
+
+  - title: Data
+    desc: >
+      Data sets provided in this package
+    contents:
+    - prodChecklist
+    - qaChecklist
+
+  - title: Metadata
+    desc: >
+      Package metadata
+    contents:
+    - raptools
