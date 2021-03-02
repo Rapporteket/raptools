@@ -16,7 +16,7 @@ ui <- tagList(
     windowTitle = appTitle,
     theme = "rap/bootstrap.css",
 
-    tabPanel("Informasjon",
+    tabPanel("Start",
              useShinyalert(),
              mainPanel(
                # info text
@@ -49,22 +49,17 @@ ui <- tagList(
                tags$head(tags$link(rel="shortcut icon", href="rap/favicon.ico"))
              )
     ),
-    tabPanel("Install package from GitHub",
+    tabPanel("Installasjon",
       # Sidebar layout with a input and output definitions ----
       sidebarLayout(
       # Sidebar panel for inputs ----
         sidebarPanel(
-          selectInput(inputId = "package",
-                      label = "Package:",
-                      choices = sort(c("intensiv", "muskel", "nakke", "nger",
-                                  "nordicscir", "norgast", "NORIC", "nordummy",
-                                  "rapbase", "rapgen", "raplog",
-                                  "hisreg", "norspis2", "nra", "smerte",
-                                  "rygg", "intensivberedskap", "korona"))),
+          shiny::uiOutput("repoSelector"),
           uiOutput("branchSelector"),
           uiOutput("installButton")
         ),
         mainPanel(
+          uiOutput("doc"),
           uiOutput("checklist"),
           p(em("System message:")),
           verbatimTextOutput("sysMessage"),
@@ -73,7 +68,7 @@ ui <- tagList(
         )
       )
     ),
-    shiny::tabPanel("Log",
+    shiny::tabPanel("Bruksstatistikk",
       shiny::mainPanel(
         fluidRow(
           shiny::uiOutput("logSelector")
@@ -85,7 +80,7 @@ ui <- tagList(
     ),
     #--------Autoreport----------
     shiny::tabPanel(
-      "Autoreport",
+      "Autoutsending",
       shiny::sidebarLayout(
         shiny::sidebarPanel(
           uiOutput("autoReportSidebar")
@@ -112,10 +107,19 @@ ui <- tagList(
       )
     ),
     #---------Config------
-    shiny::tabPanel("Config",
+    shiny::tabPanel("Informasjon",
       shiny::tabsetPanel(
+        shiny::tabPanel("Shiny Server app log",
+          shiny::sidebarLayout(
+            shiny::sidebarPanel(
+              shiny::uiOutput("shinyServerAppLogControls")
+            ),
+            shiny::mainPanel(
+              shiny::uiOutput("shinyServerLog")
+            )
+          )
+        ),
         shiny::tabPanel("rapbaseConfig",
-          shiny::tags$h4("rapbaseConfig"),
           shiny::verbatimTextOutput("rapbaseConfig")
         )
       )

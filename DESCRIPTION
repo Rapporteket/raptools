@@ -1,6 +1,6 @@
 Package: raptools
 Title: Tools for Rapporteket development
-Version: 0.1
+Version: 0.2.0
 Authors@R: 
     person(given = "Are",
            family = "Edvardsen",
@@ -13,18 +13,21 @@ Depends:
 Imports:
     dplyr,
     digest,
+    ggplot2,
+    httr,
+    jsonlite,
+    lubridate,
     magrittr,
     rapbase,
     readr,
     remotes,
+    rpivotTable,
     sendmailR,
     shinyalert,
     shinyjs,
     shinythemes,
-    yaml,
-    ggplot2,
-    lubridate,
-    rpivotTable
+    stringi,
+    yaml
 Remotes:
     Rapporteket/rapbase
 License: GPL-2
@@ -35,4 +38,4 @@ BugReports: http://github.com/Rapporteket/raptools/issues
 Suggests: 
     testthat (>= 2.1.0),
     covr
-RoxygenNote: 7.0.1
+RoxygenNote: 7.1.1

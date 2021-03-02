@@ -19,10 +19,35 @@ Sys.setlocale("LC_TIME", "nb_NO.UTF-8")
 
 server <- function(input, output, session) {
 
-  # Params
+  # session persistent data
+  ## from env
   instance <- Sys.getenv("R_RAP_INSTANCE")
   configPath <- Sys.getenv("R_RAP_CONFIG_PATH")
-
+  ## set network proxy
+  conf <- rapbase::getConfig(fileName = "rapbaseConfig.yml",
+                             packageName = "rapbase")
+  if (!is.null(conf$network$proxy$http)) {
+    proxyUrl = conf$network$proxy$http
+  } else {
+    proxyUrl <- NULL
+  }
+  ## from github api
+  path <- "orgs/rapporteket/repos?per_page=100"
+  repo <- githubApi(path = path, proxyUrl = proxyUrl)$content
+  repo <- repo %>%
+    dplyr::select(name, default_branch, updated_at) %>%
+    dplyr::filter(name != "raptools") %>%
+    dplyr::arrange(desc(updated_at))
+  ## from file
+  f <- file.info(
+    list.files("/var/log/shiny-server", full.names = TRUE)
+  )
+  f <- f %>%
+    dplyr::arrange(desc(mtime)) %>%
+    dplyr::slice_head(n = 50)
+  shinyLogFile <- rownames(f)
+  names(shinyLogFile) <- basename(rownames(f))
+  shinyLogFile <- shinyLogFile[names(shinyLogFile) != "access.log"]
 
   # widget
   output$appUserName <- renderText(getUserFullName(session))
@@ -30,13 +55,26 @@ server <- function(input, output, session) {
                                         getUserRole(session),
                                         sep = ", "))
   # User info in widget
-  userInfo <- rapbase::howWeDealWithPersonalData(session)
+  userInfo <- rapbase::howWeDealWithPersonalData(session,
+                                                 callerPkg = "raptools")
   observeEvent(input$userInfo, {
     shinyalert("Dette vet Rapporteket om deg:", userInfo,
                type = "", imageUrl = "rap/logo.svg",
                closeOnEsc = TRUE, closeOnClickOutside = TRUE,
                html = TRUE, confirmButtonText = rapbase::noOptOutOk())
   })
+
+
+  # Gjenbrukbar funksjon for å bearbeide Rmd til html
+  htmlRenderRmd <- function(srcFile, params = list()) {
+    system.file(srcFile, package = "raptools") %>%
+      knitr::knit() %>%
+      markdown::markdownToHTML(.,
+                               options = c("fragment_only",
+                                           "base64_images",
+                                           "highlight_code")) %>%
+      shiny::HTML()
+  }
 
 
   # Info
@@ -89,27 +127,66 @@ server <- function(input, output, session) {
   # Install packages
   if (instance == "PRODUCTION") {
     checklist <- prodChecklist
+    doc <- "prod_install.Rmd"
   }
   if (instance == "QA") {
     checklist <- qaChecklist
+    doc <- "qa_install.Rmd"
   }
 
+  repoBranch <- shiny::reactive({
+    shiny::req(input$repo)
+    path <- paste0("repos/rapporteket/", input$repo, "/branches")
+    branch <- githubApi(path, proxyUrl)$content
+    dplyr::filter(branch, name != "gh-pages")$name
+  })
+
+  repoRelease <- shiny::reactive({
+    shiny::req(input$repo)
+    path <- paste0("repos/rapporteket/", input$repo, "/releases")
+    rel <- githubApi(path, proxyUrl)$content
+    rel$tag_name
+  })
+
+  checklistSelected <- shiny::reactive({
+    shiny::req(input$repo)
+    NULL
+  })
+
+  output$repoSelector <- shiny::renderUI(
+    shiny::selectInput(inputId = "repo", label = "Pakke:", choices = repo$name)
+  )
+
   output$branchSelector <- renderUI(
-    switch (instance,
-      DEV = textInput(inputId = "branch", label = "Grein:"),
-      TEST = textInput(inputId = "branch", label = "Grein:"),
-      QA = selectInput(inputId = "branch", label = "Grein:",
-                       choices = c("master", "rel")),
-      PRODUCTION = selectInput(inputId = "branch", label = "Grein:",
-                               choices = c("master"))
+    switch(instance,
+      DEV = shiny::selectInput(inputId = "branch", label = "Grein:",
+                               choices = repoBranch()),
+      TEST = shiny::selectInput(inputId = "branch", label = "Grein:",
+                                choices = repoBranch()),
+      QA = shiny::selectInput(
+        inputId = "branch", label = "Grein",
+        choices = repoBranch()),
+      PRODUCTION = shiny::selectInput(inputId = "branch", label = "Versjon:",
+                                      choices = repoRelease())
     )
   )
+
+  output$doc <- shiny::renderUI({
+    shiny::req(input$repo)
+    if (instance %in% c("QA", "PRODUCTION")) {
+      htmlRenderRmd(doc, params = list(repo = input$repo,
+                                       branch = input$branch))
+    } else {
+      NULL
+    }
+  })
 
   output$checklist <- renderUI(
     if (exists('checklist')) {
       checkboxGroupInput(inputId = "manControl",
                          label = "Sjekk at du faktisk har:",
-                         choices = checklist)
+                         choices = checklist,
+                         selected = checklistSelected())
     } else {
       NULL
     }
@@ -117,7 +194,8 @@ server <- function(input, output, session) {
 
   output$installButton <- renderUI(
     if (exists('checklist')) {
-      if (length(input$manControl) == length(checklist)) {
+      if (length(input$manControl) == length(checklist) &&
+          input$branch != "") {
         actionButton(inputId = "install", label = "Install")
       } else {
         NULL
@@ -129,10 +207,15 @@ server <- function(input, output, session) {
   )
 
   installPackage <- observeEvent(input$install, {
+    branch <- input$branch
+    if (instance == "QA") {
+      branch <- repo$default_branch[repo$name == input$repo]
+    }
     withCallingHandlers({
       shinyjs::html("sysMessage", "")
       shinyjs::html("funMessage", "")
-      shinyjs::html("funMessage", rapbase::installGithubPackage(input$package, input$branch))
+      shinyjs::html("funMessage",
+                    rapbase::installGithubPackage(input$repo, branch))
     },
     message = function(m) {
       shinyjs::html(id = "sysMessage", html = m$message, add = TRUE)
@@ -473,7 +556,21 @@ server <- function(input, output, session) {
   output$delSummary <- renderText({
     as.yaml(r$rd[input$delRep])
   })
-  #----------rapbaseConfig------
+
+
+  #----------Server information------
+  output$shinyServerAppLogControls <- shiny::renderUI({
+    shiny::selectInput(inputId = "shinyServerAppLog", label = "Velg loggfil:",
+                       choices = as.list(shinyLogFile))
+  })
+
+  output$shinyServerLog <- shiny::renderUI({
+    shiny::req(input$shinyServerAppLog)
+    rawText <- readLines(input$shinyServerAppLog)
+    splitText <- stringi::stri_split(rawText, regex = "\\n")
+    lapply(splitText, shiny::p)
+  })
+
   output$rapbaseConfig <- shiny::renderText({
     raptools::getConfigTools(fileName = "rapbaseConfig")
   })
