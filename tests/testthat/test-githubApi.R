@@ -4,3 +4,7 @@ test_that("githubApi is class githubApi", {
     "githubApi"
   )
 })
+
+test_that("githubApi fun provides an error for none existing endpount", {
+  expect_error(githubApi("none/existent/endpoint"), regexp = "404")
+})
