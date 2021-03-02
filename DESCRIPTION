@@ -11,10 +11,10 @@ Description: Tools for working with Rapporteket. Mainly for developers.
 Depends:
   R (>= 3.5.0)
 Imports:
-    curl,
     dplyr,
     digest,
     ggplot2,
+    httr,
     jsonlite,
     lubridate,
     magrittr,

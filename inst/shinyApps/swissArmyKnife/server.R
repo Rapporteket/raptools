@@ -23,10 +23,17 @@ server <- function(input, output, session) {
   ## from env
   instance <- Sys.getenv("R_RAP_INSTANCE")
   configPath <- Sys.getenv("R_RAP_CONFIG_PATH")
+  ## set network proxy
+  conf <- rapbase::getConfig(fileName = "rapbaseConfig.yml",
+                             packageName = "rapbase")
+  if (!is.null(conf$network$proxy$http)) {
+    proxyUrl = conf$network$proxy$http
+  } else {
+    proxyUrl <- NULL
+  }
   ## from github api
-  url <- "https://api.github.com/orgs/rapporteket/"
-  repo <- curl::curl_fetch_memory(paste0(url, "repos?per_page=100"))
-  repo <- jsonlite::fromJSON(rawToChar(repo$content))
+  path <- "orgs/rapporteket/repos?per_page=100"
+  repo <- githubApi(path = path, proxyUrl = proxyUrl)$content
   repo <- repo %>%
     dplyr::select(name, default_branch, updated_at) %>%
     dplyr::filter(name != "raptools") %>%
@@ -127,21 +134,15 @@ server <- function(input, output, session) {
 
   repoBranch <- shiny::reactive({
     shiny::req(input$repo)
-    branch <- curl::curl_fetch_memory(
-      paste0("https://api.github.com/repos/rapporteket/",
-      input$repo, "/branches")
-    )
-    branch <- jsonlite::fromJSON(rawToChar(branch$content))
+    path <- paste0("repos/rapporteket/", input$repo, "/branches")
+    branch <- githubApi(path, proxyUrl)$content
     dplyr::filter(branch, name != "gh-pages")$name
   })
 
   repoRelease <- shiny::reactive({
     shiny::req(input$repo)
-    rel <- curl::curl_fetch_memory(
-      paste0("https://api.github.com/repos/rapporteket/",
-             input$repo, "/releases")
-    )
-    rel <- jsonlite::fromJSON(rawToChar(rel$content))
+    path <- paste0("repos/rapporteket/", input$repo, "/releases")
+    rel <- githubApi(path, proxyUrl)$content
     rel$tag_name
   })
 
