@@ -31,7 +31,7 @@ githubApi <- function(path, proxyUrl = NULL) {
     stop(
       sprintf(
         "GitHub API request failed [%s]\n%s\n<%s>",
-        status_code(resp),
+        httr::status_code(resp),
         parsed$message,
         parsed$documentation_url
       ),
