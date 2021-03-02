@@ -44,9 +44,10 @@ server <- function(input, output, session) {
   )
   f <- f %>%
     dplyr::arrange(desc(mtime)) %>%
-    dplyr::slice_head(n = 20)
+    dplyr::slice_head(n = 50)
   shinyLogFile <- rownames(f)
   names(shinyLogFile) <- basename(rownames(f))
+  shinyLogFile <- shinyLogFile[names(shinyLogFile) != "access.log"]
 
   # widget
   output$appUserName <- renderText(getUserFullName(session))
