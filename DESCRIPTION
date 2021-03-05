@@ -21,6 +21,7 @@ Imports:
     rapbase,
     readr,
     remotes,
+    rlang,
     rpivotTable,
     sendmailR,
     shinyalert,

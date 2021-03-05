@@ -6,26 +6,25 @@ server <- function(input, output, session) {
 
   # html rendering function for re-use
   htmlRenderRmd <- function(srcFile) {
-    # set param needed for report meta processing
-    params <- list(tableFormat="html")
-    system.file(srcFile, package="raptools") %>%
+    system.file(srcFile, package = "raptools") %>%
       knitr::knit() %>%
       markdown::markdownToHTML(.,
-                               options = c('fragment_only',
-                                           'base64_images',
-                                           'highlight_code')) %>%
+                               options = c("fragment_only",
+                                           "base64_images",
+                                           "highlight_code")) %>%
       shiny::HTML()
   }
 
   makeHist <- function(var, bins, makeTable = FALSE) {
     x    <- mtcars[[var]]
-    bins <- seq(min(x), max(x), length.out = bins +1)
-    t <- hist(x, breaks = bins, col = '#154ba2', border = 'white',
+    bins <- seq(min(x), max(x), length.out = bins + 1)
+    t <- hist(x, breaks = bins, col = "#154ba2", border = "white",
               main = paste("Fordeling av", var), xlab = var,
               ylab = "Antall")
     if (makeTable) {
-      data.frame(GruppeMin=t$breaks[1:length(t$mids)],
-                 GruppeMax=t$breaks[2:(length(t$mids)+1)], Antall=t$counts)
+      data.frame(GruppeMin = t$breaks[seq_len(length(t$mids))],
+                 GruppeMax = t$breaks[2:(length(t$mids) + 1)],
+                 Antall = t$counts)
     } else {
       t
     }

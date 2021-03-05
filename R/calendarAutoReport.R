@@ -23,18 +23,19 @@ calendarAutoReport <- function(runDayOfYear, pointRangeMax = 0) {
   stopifnot(is.integer(pointRangeMax) | pointRangeMax == 0)
 
   startDate <- Sys.Date() - as.numeric(strftime(Sys.Date(), format = "%d")) + 1
-  b <- data.frame(datetime=seq(startDate, by = "day", length.out = 365))
+  b <- data.frame(datetime = seq(startDate, by = "day", length.out = 365))
   b$year <- as.POSIXlt(b$datetime)$year + 1900
-  b$dayOfYear <- as.POSIXlt(b$datetime)$yday+1
-  b$yearMonthName <- strftime(b$datetime, format ="%B %Y")
-  b$dayNum <- as.numeric(strftime(b$datetime, format ="%u"))
+  b$dayOfYear <- as.POSIXlt(b$datetime)$yday + 1
+  b$yearMonthName <- strftime(b$datetime, format = "%B %Y")
+  b$dayNum <- as.numeric(strftime(b$datetime, format = "%u"))
   b$dayName <- strftime(b$datetime, format = "%a")
   b$weekNum <- as.numeric(strftime(b$datetime, format = "%W"))
   b$monthNum <- as.numeric(strftime(b$datetime, format = "%m"))
   b$monthName <- strftime(b$datetime, format = "%b")
   b$monthDayNum <- strftime(b$datetime, format = "%d")
-  b <- dplyr::group_by(b, yearMonthName) %>%
-    dplyr::mutate(., weekOfMonth=1 + weekNum - min(weekNum))
+  b <- b %>%
+    dplyr::group_by(.data$yearMonthName) %>%
+    dplyr::mutate(weekOfMonth = 1 + .data$weekNum - min(.data$weekNum))
   # make numeric id for yearMontName
   b$ymnId <- as.POSIXlt(b$datetime)$mon
 
@@ -59,31 +60,35 @@ calendarAutoReport <- function(runDayOfYear, pointRangeMax = 0) {
 
 
   # plot object
-  g <- ggplot2::ggplot(data = b, ggplot2::aes(x=weekOfMonth, y=dayName,
-                                              fill=ymnId)) +
-    ggplot2::geom_tile(colour="white",size=.1, alpha=0.3) +
+  g <- ggplot2::ggplot(
+    data = b, ggplot2::aes(x = .data$weekOfMonth, y = .data$dayName,
+                           fill = .data$ymnId)) +
+    ggplot2::geom_tile(colour = "white", size = .1, alpha = 0.3) +
     ggplot2::facet_wrap(~yearMonthName, scales = "fixed", nrow = 4) +
     ggplot2::geom_text(
       data = b,
-      ggplot2::aes(weekOfMonth , dayName, label=monthDayNum),
-      colour="white",size=2.5, nudge_x = .35, nudge_y = -.2) +
+      ggplot2::aes(.data$weekOfMonth, .data$dayName,
+                   label = .data$monthDayNum),
+      colour = "white", size = 2.5, nudge_x = .35, nudge_y = -.2) +
     ggplot2::theme_minimal() +
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                    panel.grid.minor = ggplot2::element_blank(),
                    axis.text.x = ggplot2::element_blank()) +
-    ggplot2::guides(fill=FALSE) +
+    ggplot2::guides(fill = FALSE) +
     ggplot2::labs(x = "", y = "")
 
   if (!is.null(runDayOfYear)) {
   # prepare data
-  df <- data.frame(dayOfYear=runDayOfYear)
+  df <- data.frame(dayOfYear = runDayOfYear)
 
   # count reports for each day
-  autoReportCount <- dplyr::count(df, dayOfYear)
-  b <- b %>% dplyr::left_join(autoReportCount, by = "dayOfYear")
-  g <- g + ggplot2::geom_point(data = b %>% dplyr::filter(!is.na(n)),
-                               ggplot2::aes(x=weekOfMonth, y=dayName, size = n),
-                               colour="#FF7260")
+  autoReportCount <- dplyr::count(df, .data$dayOfYear)
+  b <- b %>%
+    dplyr::left_join(autoReportCount, by = "dayOfYear")
+  g <- g + ggplot2::geom_point(data = b %>% dplyr::filter(!is.na(.data$n)),
+                               ggplot2::aes(x = .data$weekOfMonth,
+                                            y = .data$dayName, size = .data$n),
+                               colour = "#FF7260")
   }
 
   if (pointRangeMax > 0) {

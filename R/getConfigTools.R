@@ -14,13 +14,13 @@ getConfigTools <- function(fileName = "rapbaseConfig") {
   if (pth == "") {
     stop("cant find R_RAP_CONFIG_PATH")
   }
-  pthConfig <- paste0(pth, "/",fileName, ".yml")
+  pthConfig <- paste0(pth, "/", fileName, ".yml")
 
-  has_Config <-  pthConfig %>%
+  hasConfig <-  pthConfig %>%
     file.path() %>%
     file.exists()
 
-  if (!has_Config ) {
+  if (!hasConfig) {
     stop("cant find the Config file")
   }
 

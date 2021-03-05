@@ -2,6 +2,7 @@
 
 * Changed sorting of repos from updated_at to pushed_at (swissArmyKnife)
 * Fixed missing (temporary) disabling of default-branch-only for QA (swissArmyKnife)
+* Lintring and improving
 
 # raptools 0.2.0
 

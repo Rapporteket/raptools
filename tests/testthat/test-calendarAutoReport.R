@@ -1,7 +1,7 @@
 testthat::context("test calendarAutoReport")
 
 test_that("class of the output object is ggplot", {
-  expect_equal(class(raptools::calendarAutoReport(1:10)),c("gg","ggplot"))
+  expect_equal(class(raptools::calendarAutoReport(1:10)), c("gg", "ggplot"))
 })
 
 test_that("errors are produced for wrong input types", {

@@ -4,14 +4,15 @@ library(rpivotTable)
 library(shinyalert)
 library(shinyjs)
 
-addResourcePath('rap', system.file('www', package='rapbase'))
-appTitle = "Swiss army knife"
+addResourcePath("rap", system.file("www", package = "rapbase"))
+appTitle <- "Swiss army knife"
 
 
 ui <- tagList(
   shinyjs::useShinyjs(),
   navbarPage(
-    title = div(a(includeHTML(system.file('www/logo.svg', package='rapbase'))),
+    title = div(a(includeHTML(system.file("www/logo.svg",
+                                          package = "rapbase"))),
                 appTitle),
     windowTitle = appTitle,
     theme = "rap/bootstrap.css",
@@ -22,9 +23,9 @@ ui <- tagList(
                # info text
                system.file("info.Rmd", package = "raptools") %>%
                  knitr::knit() %>%
-                 markdown::markdownToHTML(., options = c('fragment_only',
-                                                         'base64_images',
-                                                         'highlight_code'),
+                 markdown::markdownToHTML(., options = c("fragment_only",
+                                                         "base64_images",
+                                                         "highlight_code"),
                                           encoding = "utf-8") %>%
                  shiny::HTML(),
                hr(),
@@ -46,7 +47,8 @@ ui <- tagList(
                appNavbarUserWidget(user = uiOutput("appUserName"),
                                    organization = uiOutput("appOrgName"),
                                    addUserInfo = TRUE),
-               tags$head(tags$link(rel="shortcut icon", href="rap/favicon.ico"))
+               tags$head(tags$link(rel = "shortcut icon",
+                                   href = "rap/favicon.ico"))
              )
     ),
     tabPanel("Installasjon",
@@ -126,4 +128,3 @@ ui <- tagList(
     )
   ) # navbarPage
 ) # tagList
-

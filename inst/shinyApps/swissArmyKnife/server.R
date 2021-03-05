@@ -20,7 +20,7 @@ server <- function(input, output, session) {
   conf <- rapbase::getConfig(fileName = "rapbaseConfig.yml",
                              packageName = "rapbase")
   if (!is.null(conf$network$proxy$http)) {
-    proxyUrl = conf$network$proxy$http
+    proxyUrl <- conf$network$proxy$http
   } else {
     proxyUrl <- NULL
   }
@@ -131,7 +131,7 @@ server <- function(input, output, session) {
     shiny::req(input$repo)
     path <- paste0("repos/rapporteket/", input$repo, "/branches")
     branch <- githubApi(path, proxyUrl)$content
-    dplyr::filter(branch, name != "gh-pages")$name
+    dplyr::filter(branch, .data$name != "gh-pages")$name
   })
 
   repoRelease <- shiny::reactive({
@@ -175,7 +175,7 @@ server <- function(input, output, session) {
   })
 
   output$checklist <- renderUI(
-    if (exists('checklist')) {
+    if (exists("checklist")) {
       checkboxGroupInput(inputId = "manControl",
                          label = "Sjekk at du faktisk har:",
                          choices = checklist,
@@ -186,7 +186,7 @@ server <- function(input, output, session) {
   )
 
   output$installButton <- renderUI(
-    if (exists('checklist')) {
+    if (exists("checklist")) {
       if (length(input$manControl) == length(checklist) &&
           input$branch != "") {
         actionButton(inputId = "install", label = "Install")
@@ -220,7 +220,7 @@ server <- function(input, output, session) {
       label = "Log:",
       choices = list(
         "Application level" = "app",
-        "Report level"="report")
+        "Report level" = "report")
     )
   )
 
@@ -234,7 +234,7 @@ server <- function(input, output, session) {
         weekday = lubridate::wday(
           time,
           week_start = 1,
-          abbr =FALSE))
+          abbr = FALSE))
   )
   output$logPivottTable <- rpivotTable::renderRpivotTable(
     rpivotTable::rpivotTable(logData())
@@ -265,8 +265,8 @@ server <- function(input, output, session) {
         selectInput(
           "interval", "Intervall:",
           list(
-            dag="DSTday", uke="week", mnd="month",
-            kvartal="quarter", aar="year"),
+            dag = "DSTday", uke = "week", mnd = "month",
+            kvartal = "quarter", aar = "year"),
           selected = "month"),
         dateInput("from", "Start dato:"),
         actionButton("setDays", "Sett kjøredager"),
@@ -286,10 +286,10 @@ server <- function(input, output, session) {
   #------AR server----------------
   # insert "" for a name/symbol value in one-level lists
   padList <- function(list, padding = "NO DEFAULT, PLEASE SET!") {
-    if (is.pairlist(list)){
+    if (is.pairlist(list)) {
       list <- as.list(list)
     }
-    for (i in 1:length(names(list))) {
+    for (i in seq_len(length(names(list)))) {
       if (is.name(list[[i]])) {
         list[[i]] <- padding
       }
@@ -301,7 +301,7 @@ server <- function(input, output, session) {
 
   ## Data
 
-  r <- reactiveValues(rd=readAutoReportData())
+  r <- reactiveValues(rd = readAutoReportData())
   newReportConfList <- reactiveValues()
   newReportConfList <- list()
   newReportConfList$params <- NULL
@@ -324,7 +324,7 @@ server <- function(input, output, session) {
       params <- pv$v
       names(params) <- pv$p
       paramsListVector <- list()
-      for (i in 1:length(params)){
+      for (i in seq_len(length(params))) {
         paramsListVector[[i]] <- as.list(params[i])
       }
       newReportConfList$params <- paramsListVector
@@ -474,7 +474,7 @@ server <- function(input, output, session) {
 
   # dynamic select params in function
   output$regFunParamsControls <- renderUI({
-    if (req(input$newReg)=="") {
+    if (req(input$newReg) == "") {
       choices <- c("Velg pakke og funksjon først...")
     } else {
       choices <- c(names(formals(input$regFun)))

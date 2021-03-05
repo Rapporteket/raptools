@@ -14,10 +14,10 @@ shinyServer(function(input, output, session) {
 
   # insert "" for a name/symbol value in one-level lists
   padList <- function(list, padding = "NO DEFAULT, PLEASE SET!") {
-    if (is.pairlist(list)){
+    if (is.pairlist(list)) {
       list <- as.list(list)
     }
-    for (i in 1:length(names(list))) {
+    for (i in 1:seq_len(length(names(list)))) {
       if (is.name(list[[i]])) {
         list[[i]] <- padding
       }
@@ -29,7 +29,7 @@ shinyServer(function(input, output, session) {
 
   ## Data
 
-  r <- reactiveValues(rd=readAutoReportData())
+  r <- reactiveValues(rd = readAutoReportData())
   newReportConfList <- reactiveValues()
   newReportConfList <- list()
   newReportConfList$params <- NULL
@@ -52,7 +52,7 @@ shinyServer(function(input, output, session) {
       params <- pv$v
       names(params) <- pv$p
       paramsListVector <- list()
-      for (i in 1:length(params)){
+      for (i in seq_len(length(params))) {
         paramsListVector[[i]] <- as.list(params[i])
       }
       newReportConfList$params <- paramsListVector
@@ -202,7 +202,7 @@ shinyServer(function(input, output, session) {
 
   # dynamic select params in function
   output$regFunParamsControls <- renderUI({
-    if (input$newReg=="") {
+    if (input$newReg == "") {
       choices <- c("Velg pakke og funksjon først...")
     } else {
       choices <- c(names(formals(input$regFun)))

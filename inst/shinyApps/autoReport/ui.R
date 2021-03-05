@@ -1,9 +1,7 @@
-#library(shiny)
-
 # Define UI for application that draws a histogram
 shinyUI(
   navbarPage(
-    title="Rutinemessig rapportering",
+    title = "Rutinemessig rapportering",
     theme = "bootstrap.css",
 
     # Application title
@@ -38,8 +36,8 @@ shinyUI(
           uiOutput("handleEmailControls"),
           tags$hr(),
           selectInput("interval", "Intervall:",
-                      list(dag="DSTday", uke="week", mnd="month",
-                           kvartal="quarter", aar="year"),
+                      list(dag = "DSTday", uke = "week", mnd = "month",
+                           kvartal = "quarter", aar = "year"),
                       selected = "month"),
           dateInput("from", "Start dato:"),
           actionButton("setDays", "Sett kjøredager"),

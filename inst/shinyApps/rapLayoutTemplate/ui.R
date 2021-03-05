@@ -2,21 +2,23 @@
 library(shiny)
 library(rapbase)
 
-addResourcePath('rap', system.file('www', package='rapbase'))
-regTitle = "rapLayoutTemplate"
+addResourcePath("rap", system.file("www", package = "rapbase"))
+regTitle <- "rapLayoutTemplate"
 
 # Define UI for application that draws a histogram
 ui <- tagList(
   shinythemes::themeSelector(),
   navbarPage(
-    title = div(img(src="rap/logo.svg", alt="Rapporteket", height="26px"),
+    title = div(img(src = "rap/logo.svg", alt = "Rapporteket",
+                    height = "26px"),
                 regTitle),
     windowTitle = regTitle,
 
     tabPanel("Form og farge",
       sidebarLayout(
         sidebarPanel(width = 3,
-          textInput(inputId="test", label="Eksempel", value = "Hvasomhelst")
+          textInput(inputId = "test", label = "Eksempel",
+                    value = "Hvasomhelst")
         ),
         mainPanel(
           htmlOutput("formFarge", inline = TRUE)

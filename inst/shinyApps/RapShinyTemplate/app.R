@@ -10,14 +10,15 @@
 library(shiny)
 library(rapbase)
 
-addResourcePath('rap', system.file('www', package='rapbase'))
-regTitle = "RAPPORTEKET UI TEMPLATE"
+addResourcePath("rap", system.file("www", package = "rapbase"))
+regTitle <- "RAPPORTEKET UI TEMPLATE"
 
 # Define UI for application that draws a histogram
 ui <- tagList(
   shinythemes::themeSelector(),
   navbarPage(
-    title = div(img(src="rap/logo.svg", alt="Rapporteket", height="26px"),
+    title = div(img(src = "rap/logo.svg", alt = "Rapporteket",
+                    height = "26px"),
                 regTitle),
     windowTitle = regTitle,
   tabPanel("FigType 1",
@@ -112,10 +113,9 @@ server <- function(input, output, session) {
     bins <- seq(min(x), max(x), length.out = 10)
 
     # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+    hist(x, breaks = bins, col = "darkgray", border = "white")
   })
 }
 
 # Run the application
 shinyApp(ui = ui, server = server)
-

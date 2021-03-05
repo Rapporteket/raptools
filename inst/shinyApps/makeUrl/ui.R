@@ -25,7 +25,8 @@ ui <- fluidPage(
                          selected = NULL),
       selectInput(inputId = "resh_id",
                   label = "resh_id:",
-                  choices = c("muskel, UNN" = "101719", "norgast, UNN" = "601225",
+                  choices = c("muskel, UNN" = "101719",
+                              "norgast, UNN" = "601225",
                               "123456" = "123456", "789012" = "789012",
                               "101619" = "101619", "102966" = "102966",
                               "Intensiv, Ullevål kir int" = "109773",
@@ -65,7 +66,8 @@ ui <- fluidPage(
       # verbatimTextOutput("httpRequest"),
 
       # return from rapbase functions
-      h4("Use above url when linked to myself (this app) to test 'rapbase' functions:"),
+      h4(paste("Use above url when linked to myself (this app) to test",
+               "'rapbase' functions:")),
       textOutput("callUser"),
       textOutput("callGroups"),
       textOutput("callReshId"),

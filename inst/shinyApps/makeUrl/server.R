@@ -24,7 +24,7 @@ server <- function(input, output, session) {
                               paste0("auth_proxy ", input$proxyUser, ";"),
                               paste0("auth_proxy ", input$proxyGroups, ";"),
                               paste0("server {... whitelist_headers ",
-                                     input$whitelistResh,"; ...}"),
+                                     input$whitelistResh, "; ...}"),
                               paste0("server {... whitelist_headers ",
                                      input$whitelistRole, "; ...}")),
                shiny_session = c("na",
@@ -55,7 +55,7 @@ server <- function(input, output, session) {
   # Generate concatenated url
   output$url <- renderUI({
     url <- compileUrl()
-    tags$a(url, href=url)
+    tags$a(url, href = url)
   })
 
   # Generate http-content

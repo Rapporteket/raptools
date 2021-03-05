@@ -2,7 +2,7 @@ context("Test getLogData")
 
 currentConfigPath <- Sys.getenv("R_RAP_CONFIG_PATH")
 
-Sys.setenv(R_RAP_CONFIG_PATH="")
+Sys.setenv(R_RAP_CONFIG_PATH = "")
 
 test_that("the function produces the correct errors", {
   expect_error(
@@ -19,7 +19,7 @@ test_that("the function produces the correct errors", {
     )
 })
 
-Sys.setenv(R_RAP_CONFIG_PATH="something")
+Sys.setenv(R_RAP_CONFIG_PATH = "something")
 test_that("the function produces the correct errors", {
   expect_error(
     raptools::getLogData("app"),
@@ -31,4 +31,4 @@ test_that("the function produces the correct errors", {
     )
 })
 
-Sys.setenv(R_RAP_CONFIG_PATH=currentConfigPath)
+Sys.setenv(R_RAP_CONFIG_PATH = currentConfigPath)

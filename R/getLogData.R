@@ -24,8 +24,8 @@ getLogData <- function(log) {
     stop("cant find the log")
   }
 
-  logData <- read.csv(fileLog,
-                      header = TRUE,
-                      stringsAsFactors = FALSE)
+  logData <- utils::read.csv(fileLog,
+                             header = TRUE,
+                             stringsAsFactors = FALSE)
   return(invisible(logData))
 }
