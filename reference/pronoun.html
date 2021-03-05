@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Make calendar of report schedule and daily load — calendarAutoReport • raptools</title>
+<title>Data pronouns — .data • raptools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,8 +46,8 @@
 
 
 
-<meta property="og:title" content="Make calendar of report schedule and daily load — calendarAutoReport" />
-<meta property="og:description" content="Make calendar of report schedule and daily load" />
+<meta property="og:title" content="Data pronouns — .data" />
+<meta property="og:description" content="See rlang::.data for details" />
 <meta property="og:image" content="/logo.svg" />
 
 
@@ -119,45 +119,19 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Make calendar of report schedule and daily load</h1>
-    <small class="dont-index">Source: <a href='http://github.com/Rapporteket/raptools/blob/master/R/calendarAutoReport.R'><code>R/calendarAutoReport.R</code></a></small>
-    <div class="hidden name"><code>calendarAutoReport.Rd</code></div>
+    <h1>Data pronouns</h1>
+    <small class="dont-index">Source: <a href='http://github.com/Rapporteket/raptools/blob/master/R/utils.R'><code>R/utils.R</code></a></small>
+    <div class="hidden name"><code>pronoun.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Make calendar of report schedule and daily load</p>
+    <p>See <code>rlang::<a href='https://rlang.r-lib.org/reference/tidyeval-data.html'>.data</a></code> for details</p>
     </div>
 
-    <pre class="usage"><span class='fu'>calendarAutoReport</span><span class='op'>(</span><span class='va'>runDayOfYear</span>, pointRangeMax <span class='op'>=</span> <span class='fl'>0</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='va'>.data</span></pre>
 
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>runDayOfYear</th>
-      <td><p>Numeric vector of yeardays for which reports are to be
-run. May well contain repeating values</p></td>
-    </tr>
-    <tr>
-      <th>pointRangeMax</th>
-      <td><p>Integer to provide static range of geom_point as
-[1 pointRangeMax]. If set to 0 (default) the range of current data will be
-used.</p></td>
-    </tr>
-    </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a (gg)plot object</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>monthlyReport</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='fl'>1</span>, to <span class='op'>=</span> <span class='fl'>365</span>, by <span class='op'>=</span> <span class='fl'>30</span><span class='op'>)</span>
-<span class='va'>weeklyReport</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='fl'>1</span>, to <span class='op'>=</span> <span class='fl'>365</span>, by <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span>
-<span class='va'>summerWeeklyReport</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/seq.html'>seq</a></span><span class='op'>(</span>from <span class='op'>=</span> <span class='fl'>130</span>, to <span class='op'>=</span> <span class='fl'>250</span>, by <span class='op'>=</span> <span class='fl'>7</span><span class='op'>)</span>
-<span class='va'>specialReport</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>summerWeeklyReport</span>, <span class='fl'>150</span><span class='op'>:</span><span class='fl'>170</span><span class='op'>)</span>
-<span class='va'>rdoy</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>monthlyReport</span>, <span class='va'>weeklyReport</span>, <span class='va'>summerWeeklyReport</span>, <span class='va'>specialReport</span><span class='op'>)</span>
-<span class='fu'>calendarAutoReport</span><span class='op'>(</span><span class='va'>rdoy</span><span class='op'>)</span>
-</div><div class='img'><img src='calendarAutoReport-1.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
