@@ -1,3 +1,8 @@
+# raptools 0.2.1
+
+* Changed sorting of repos from updated_at to pushed_at (swissArmyKnife)
+* Fixed missing (temporary) disabling of default-branch-only for QA (swissArmyKnife)
+
 # raptools 0.2.0
 
 * Improvements of how R packages are installed across environments
