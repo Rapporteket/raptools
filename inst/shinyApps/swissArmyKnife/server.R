@@ -208,9 +208,9 @@ server <- function(input, output, session) {
 
   installPackage <- observeEvent(input$install, {
     branch <- input$branch
-    if (instance == "QA") {
-      branch <- repo$default_branch[repo$name == input$repo]
-    }
+    # if (instance == "QA") {
+    #   branch <- repo$default_branch[repo$name == input$repo]
+    # }
     withCallingHandlers({
       shinyjs::html("sysMessage", "")
       shinyjs::html("funMessage", "")
