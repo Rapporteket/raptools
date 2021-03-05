@@ -28,9 +28,9 @@ server <- function(input, output, session) {
   path <- "orgs/rapporteket/repos?per_page=100"
   repo <- githubApi(path = path, proxyUrl = proxyUrl)$content
   repo <- repo %>%
-    dplyr::select(name, default_branch, updated_at) %>%
+    dplyr::select(name, default_branch, pushed_at) %>%
     dplyr::filter(name != "raptools") %>%
-    dplyr::arrange(desc(updated_at))
+    dplyr::arrange(desc(pushed_at))
   ## from file
   f <- file.info(
     list.files("/var/log/shiny-server", full.names = TRUE)
