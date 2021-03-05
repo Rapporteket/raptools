@@ -10,10 +10,6 @@ library(ggplot2)
 library(raptools)
 library(yaml)
 
-# For some reason Shiny Server does not get the server locale settings right.
-# To display dates correct, enforce locale here:
-Sys.setlocale("LC_TIME", "nb_NO.UTF-8")
-
 server <- function(input, output, session) {
 
   # session persistent data
