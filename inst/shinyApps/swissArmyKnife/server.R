@@ -1,5 +1,4 @@
-#library(dplyr)
-#library(httr)
+library(dplyr)
 library(lubridate)
 library(magrittr)
 library(rapbase)
@@ -7,8 +6,6 @@ library(raptools)
 library(rpivotTable)
 library(shinyalert)
 library(shinyjs)
-
-
 library(ggplot2)
 library(raptools)
 library(yaml)
