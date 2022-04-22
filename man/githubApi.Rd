@@ -19,6 +19,3 @@ resource path and the response object
 \description{
 Make calls to the github API
 }
-\examples{
-githubApi("repos/Rapporteket/raptools/branches")
-}
