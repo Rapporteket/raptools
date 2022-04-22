@@ -346,7 +346,7 @@ server <- function(input, output, session) {
     if (input$reg == "Alle") {
       r$rd
     } else {
-      selectByReg(r$rd, input$reg)
+      rapbase::filterAutoRep(r$rd, by = "package", input$reg)
     }
   })
 
@@ -536,7 +536,7 @@ server <- function(input, output, session) {
 
   output$delRepControls <- renderUI({
     if (length(input$delReg) > 0) {
-      val <- names(selectByReg(r$rd, input$delReg))
+      val <- names(rapbase::filterAutoRep(r$rd, by = "package", input$delReg))
     } else {
       val <- names(r$rd)
     }
