@@ -153,12 +153,12 @@ server <- function(input, output, session) {
   output$branchSelector <- renderUI(
     switch(instance,
       DEV = shiny::selectInput(inputId = "branch", label = "Grein:",
-                               choices = repoBranch()),
+                               choices = c(repoBranch(), repoRelease())),
       TEST = shiny::selectInput(inputId = "branch", label = "Grein:",
-                                choices = repoBranch()),
+                                choices = c(repoBranch(), repoRelease())),
       QA = shiny::selectInput(
         inputId = "branch", label = "Grein",
-        choices = repoBranch()),
+        choices = c(repoBranch(), repoRelease())),
       PRODUCTION = shiny::selectInput(inputId = "branch", label = "Versjon:",
                                       choices = repoRelease())
     )

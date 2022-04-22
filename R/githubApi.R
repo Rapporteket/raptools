@@ -7,9 +7,6 @@
 #' @return A list of class githubApi containing the parsed content, API
 #' resource path and the response object
 #' @export
-#'
-#' @examples
-#' githubApi("repos/Rapporteket/raptools/branches")
 
 githubApi <- function(path, proxyUrl = NULL) {
   url <- httr::modify_url("https://api.github.com", path = path)

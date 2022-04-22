@@ -1,0 +1,34 @@
+[
+    {
+        "name": "fun-upgrade",
+        "commit": {
+            "sha": "1d07a618c84cb331685709014e98035f9e42e1f3",
+            "url": "https://api.github.com/repos/Rapporteket/raptools/commits/1d07a618c84cb331685709014e98035f9e42e1f3"
+        },
+        "protected": false
+    },
+    {
+        "name": "gh-pages",
+        "commit": {
+            "sha": "ca01d7b98f39deca1884501ac13cdfe0dfa49a2c",
+            "url": "https://api.github.com/repos/Rapporteket/raptools/commits/ca01d7b98f39deca1884501ac13cdfe0dfa49a2c"
+        },
+        "protected": false
+    },
+    {
+        "name": "install-release",
+        "commit": {
+            "sha": "98df4f09596e5d17b1181040adf733d7be476563",
+            "url": "https://api.github.com/repos/Rapporteket/raptools/commits/98df4f09596e5d17b1181040adf733d7be476563"
+        },
+        "protected": false
+    },
+    {
+        "name": "main",
+        "commit": {
+            "sha": "0a906c1f2e0de5ee4ac4790f09d99736822b9500",
+            "url": "https://api.github.com/repos/Rapporteket/raptools/commits/0a906c1f2e0de5ee4ac4790f09d99736822b9500"
+        },
+        "protected": true
+    }
+]
