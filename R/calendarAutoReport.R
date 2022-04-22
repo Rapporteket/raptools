@@ -74,7 +74,7 @@ calendarAutoReport <- function(runDayOfYear, pointRangeMax = 0) {
     ggplot2::theme(panel.grid.major = ggplot2::element_blank(),
                    panel.grid.minor = ggplot2::element_blank(),
                    axis.text.x = ggplot2::element_blank()) +
-    ggplot2::guides(fill = FALSE) +
+    ggplot2::guides(fill = "none") +
     ggplot2::labs(x = "", y = "")
 
   if (!is.null(runDayOfYear)) {
