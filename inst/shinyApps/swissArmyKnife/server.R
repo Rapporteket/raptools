@@ -205,7 +205,8 @@ server <- function(input, output, session) {
       shinyjs::html("sysMessage", "")
       shinyjs::html("funMessage", "")
       shinyjs::html("funMessage",
-                    rapbase::installGithubPackage(input$repo, branch))
+                    raptools::installGithubPackage(
+                      input$repo, branch, input$upgradeDeps, TRUE))
     },
     message = function(m) {
       shinyjs::html(id = "sysMessage", html = m$message, add = TRUE)
