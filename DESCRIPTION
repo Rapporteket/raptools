@@ -36,7 +36,8 @@ Encoding: UTF-8
 LazyData: true
 URL: http://github.com/Rapporteket/raptools
 BugReports: http://github.com/Rapporteket/raptools/issues
-Suggests: 
-    testthat (>= 2.1.0),
-    covr
+Suggests:
+    covr,
+    httptest,
+    testthat (>= 2.1.0)
 RoxygenNote: 7.1.1
