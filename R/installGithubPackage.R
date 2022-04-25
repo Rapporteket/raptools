@@ -17,9 +17,9 @@ installGithubPackage <- function(packageName, branchName = "master",
   # nocov start
 
   story <- ""
-  story <- rapbase::makeMessage(story, "Initiating 'InstallGithubPackage'")
+  story <- makeMessage(story, "Initiating 'InstallGithubPackage'")
 
-  story <- rapbase::makeMessage(story, "Reading configuration")
+  story <- makeMessage(story, "Reading configuration")
 
   if (readConfig) {
     conf <- rapbase::getConfig(
@@ -30,13 +30,13 @@ installGithubPackage <- function(packageName, branchName = "master",
   }
 
   if (is.null(conf$network[["proxy"]])) {
-    story <- rapbase::makeMessage(story, "Proxy not defined in config. If your system
+    story <- makeMessage(story, "Proxy not defined in config. If your system
                          does not use one please provide it as an empty string.
                          Stopping.")
     stop(story)
   }
 
-  story <- rapbase::makeMessage(story, "Setting network proxies")
+  story <- makeMessage(story, "Setting network proxies")
   if (!is.null(conf$network$proxy$http)) {
     Sys.setenv(http_proxy = conf$network$proxy$http)
     Sys.setenv(https_proxy = conf$network$proxy$http)
@@ -45,7 +45,7 @@ installGithubPackage <- function(packageName, branchName = "master",
       port = as.numeric(conf$network$proxy$port)
     ))
   }
-  story <- rapbase::makeMessage(story, "Set 'libcurl' as download method")
+  story <- makeMessage(story, "Set 'libcurl' as download method")
   options(download.file.method = "libcurl")
 
   githubPackage <- paste0(conf$github$organization, "/", packageName)
@@ -53,7 +53,7 @@ installGithubPackage <- function(packageName, branchName = "master",
 
   success <- paste0("'", packageName, "' installed")
   if (packageName == "rapbase") {
-    story <- rapbase::makeMessage(
+    story <- makeMessage(
       story,
       paste0(
         "Intalling '", githubRapbase,
@@ -75,12 +75,12 @@ installGithubPackage <- function(packageName, branchName = "master",
     }
     )
 
-    story <- rapbase::makeMessage(story, res)
-    story <- rapbase::makeMessage(story, "Done with 'rapbase'")
+    story <- makeMessage(story, res)
+    story <- makeMessage(story, "Done with 'rapbase'")
   }
 
   if (packageName != "rapbase") {
-    story <- rapbase::makeMessage(story, paste0(
+    story <- makeMessage(story, paste0(
       "Installing '", packageName,
       "' from branch '", branchName, "'"
     ))
@@ -99,13 +99,13 @@ installGithubPackage <- function(packageName, branchName = "master",
     }
     )
 
-    story <- rapbase::makeMessage(story, res)
+    story <- makeMessage(story, res)
   }
   else {
-    story <- rapbase::makeMessage(story, "No additional packages to install")
+    story <- makeMessage(story, "No additional packages to install")
   }
 
-  story <- rapbase::makeMessage(story, "Done")
+  story <- makeMessage(story, "Done")
 
   return(story)
 
