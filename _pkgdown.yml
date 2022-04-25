@@ -17,6 +17,8 @@ reference:
     - getLogData
     - githubApi
     - static_help
+    - installGithubPackage
+    - makeMessage
 
   - title: Data
     desc: >
