@@ -36,6 +36,14 @@ installGithubPackage <- function(packageName, branchName = "master",
     stop(story)
   }
 
+  if (is.null(conf$github$PAT[["rapmaskin"]])) {
+    story <- makeMessage(story, "No access token found in config. This might
+                         bounce...")
+    token <- NULL
+  } else {
+    token <- conf$github$PAT$rapmaskin
+  }
+
   story <- makeMessage(story, "Setting network proxies")
   if (!is.null(conf$network$proxy$http)) {
     Sys.setenv(http_proxy = conf$network$proxy$http)
@@ -62,7 +70,10 @@ installGithubPackage <- function(packageName, branchName = "master",
     )
     res <- tryCatch({
       remotes::install_github(
-        githubRapbase, ref = branchName, upgrade = upgradeDeps
+        githubRapbase,
+        ref = branchName,
+        auth_token = token,
+        upgrade = upgradeDeps
       )
 
       success
@@ -86,7 +97,10 @@ installGithubPackage <- function(packageName, branchName = "master",
     ))
     res <- tryCatch({
       remotes::install_github(
-        githubPackage, ref = branchName, upgrade = upgradeDeps
+        githubPackage,
+        ref = branchName,
+        auth_token = token,
+        upgrade = upgradeDeps
       )
 
       success
