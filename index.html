@@ -26,6 +26,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -38,18 +40,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">raptools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.2.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.3.0</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -59,7 +55,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="http://github.com/Rapporteket/raptools/">
+  <a href="http://github.com/Rapporteket/raptools/" class="external-link">
     <span class="fab fa-github fa-lg"></span>
      
   </a>
@@ -76,28 +72,27 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="raptools-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#raptools-" class="anchor"></a>raptools <img src="reference/figures/logo.svg" align="right" height="139">
+<div class="section level1">
+<div class="page-header"><h1 id="raptools-">raptools <img src="reference/figures/logo.svg" align="right" height="139"><a class="anchor" aria-label="anchor" href="#raptools-"></a>
 </h1></div>
 <!-- badges: start -->
 
 <p>Package containing tools for development at Rapporteket</p>
-<div id="install" class="section level2">
-<h2 class="hasAnchor">
-<a href="#install" class="anchor"></a>Install</h2>
+<div class="section level2">
+<h2 id="install">Install<a class="anchor" aria-label="anchor" href="#install"></a>
+</h2>
 <p>From within R:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"Rapporteket/raptools"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"Rapporteket/raptools"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="use" class="section level2">
-<h2 class="hasAnchor">
-<a href="#use" class="anchor"></a>Use</h2>
-<div id="simulate-url-for-shiny-server-app" class="section level3">
-<h3 class="hasAnchor">
-<a href="#simulate-url-for-shiny-server-app" class="anchor"></a>Simulate url for Shiny Server app</h3>
+<div class="section level2">
+<h2 id="use">Use<a class="anchor" aria-label="anchor" href="#use"></a>
+</h2>
+<div class="section level3">
+<h3 id="simulate-url-for-shiny-server-app">Simulate url for Shiny Server app<a class="anchor" aria-label="anchor" href="#simulate-url-for-shiny-server-app"></a>
+</h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">rapbase</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rapbase/man/runShinyApp.html">runShinyApp</a></span><span class="op">(</span>appName <span class="op">=</span> <span class="st">"makeUrl"</span>, appsDirectoryName <span class="op">=</span> <span class="st">"shinyApps"</span>, packageName <span class="op">=</span> <span class="st">"raptools"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu">rapbase</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/rapbase/man/runShinyApp.html" class="external-link">runShinyApp</a></span><span class="op">(</span>appName <span class="op">=</span> <span class="st">"makeUrl"</span>, appsDirectoryName <span class="op">=</span> <span class="st">"shinyApps"</span>, packageName <span class="op">=</span> <span class="st">"raptools"</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -105,49 +100,60 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Browse source code at <br><a href="http://github.com/Rapporteket/raptools/">http://​github.com/​Rapporteket/​raptools/​</a>
-</li>
-<li>Report a bug at <br><a href="http://github.com/Rapporteket/raptools/issues">http://​github.com/​Rapporteket/​raptools/​issues</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="https://www.r-project.org/Licenses/GPL-2">GPL-2</a></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Are Edvardsen <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5210-3656" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="http://github.com/Rapporteket/raptools/" class="external-link">Browse source code</a></li>
+<li><a href="http://github.com/Rapporteket/raptools/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://github.com/rapporteket/raptools/releases"><img src="https://img.shields.io/github/v/release/rapporteket/raptools?sort=semver" alt="Version"></a></li>
-<li><a href="https://github.com/Rapporteket/raptools/actions"><img src="https://github.com/Rapporteket/raptools/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
-<li><a href="https://codecov.io/gh/Rapporteket/raptools?branch=main"><img src="https://codecov.io/gh/Rapporteket/raptools/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
-<li><a href="https://www.tidyverse.org/lifecycle/#maturing"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
-<li><a href="https://github.com/rapporteket/raptools/issues"><img src="https://img.shields.io/github/issues/rapporteket/raptools.svg" alt="GitHub open issues"></a></li>
-<li><a href="https://www.gnu.org/licenses/gpl-3.0"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a></li>
-<li><a href="https://rapporteket.github.io/raptools/"><img src="https://img.shields.io/badge/Doc--grey.svg" alt="Doc"></a></li>
+<li><a href="https://www.r-project.org/Licenses/GPL-2" class="external-link">GPL-2</a></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing raptools</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Are Edvardsen <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-5210-3656" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/rapporteket/raptools/releases" class="external-link"><img src="https://img.shields.io/github/v/release/rapporteket/raptools?sort=semver" alt="Version"></a></li>
+<li><a href="https://github.com/Rapporteket/raptools/actions" class="external-link"><img src="https://github.com/Rapporteket/raptools/workflows/R-CMD-check/badge.svg" alt="R build status"></a></li>
+<li><a href="https://codecov.io/gh/Rapporteket/raptools?branch=main" class="external-link"><img src="https://codecov.io/gh/Rapporteket/raptools/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://www.tidyverse.org/lifecycle/#maturing" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="Lifecycle: maturing"></a></li>
+<li><a href="https://github.com/rapporteket/raptools/issues" class="external-link"><img src="https://img.shields.io/github/issues/rapporteket/raptools.svg" alt="GitHub open issues"></a></li>
+<li><a href="https://www.gnu.org/licenses/gpl-3.0" class="external-link"><img src="https://img.shields.io/badge/License-GPLv3-blue.svg" alt="License: GPL v3"></a></li>
+<li><a href="https://rapporteket.github.io/raptools/" class="external-link"><img src="https://img.shields.io/badge/Doc--grey.svg" alt="Doc"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Are Edvardsen.</p>
+  <p></p>
+<p>Developed by Are Edvardsen.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -155,6 +161,8 @@
 
   
 
+
+  
 
   </body>
 </html>
