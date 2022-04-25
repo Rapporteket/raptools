@@ -1,6 +1,6 @@
 Package: raptools
 Title: Tools for Rapporteket development
-Version: 0.3.0
+Version: 0.3.0.9000
 Authors@R: 
     person(given = "Are",
            family = "Edvardsen",
