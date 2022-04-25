@@ -58,6 +58,10 @@ ui <- tagList(
         sidebarPanel(
           shiny::uiOutput("repoSelector"),
           uiOutput("branchSelector"),
+          shiny::checkboxInput(
+            inputId = "upgradeDeps",
+            label = "Oppdater avhengige pakker",
+            value = TRUE),
           uiOutput("installButton")
         ),
         mainPanel(
