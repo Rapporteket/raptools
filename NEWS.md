@@ -1,3 +1,9 @@
+# raptools 0.3.0
+
+* Releases also available for install in DEV, TEST and QA
+* Opt out of dependent packages upgrade when installing
+* Some new functions moved from rapbase (and hence no longer needed there) 
+
 # raptools 0.2.1
 
 * Changed sorting of repos from updated_at to pushed_at (swissArmyKnife)
